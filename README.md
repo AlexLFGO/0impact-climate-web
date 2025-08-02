@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ØG Climate Impact Monitor
+
+A real-time dashboard showcasing the environmental impact and carbon footprint of ØG's decentralized AI infrastructure.
+
+## Overview
+
+This dashboard provides transparent, data-driven insights into ØG's carbon emissions across all network layers, demonstrating our commitment to building sustainable AI infrastructure. Built with Next.js 15 and TypeScript, it features real-time metrics, beautiful visualizations, and comprehensive emissions tracking.
+
+## Features
+
+- **Live Network Impact**: Real-time tracking of carbon offsets, clean energy usage, and carbon-neutral transactions
+- **Layer-by-Layer Analysis**: Detailed metrics for each ØG network layer (Chain, Storage, DA, Compute, Alignment)
+- **Emissions Tracking**: Historical data visualization showing trends and improvements
+- **Carbon-Aware Consensus**: Explanation of how ØG's consensus mechanism automatically offsets emissions
+- **Energy Source Breakdown**: Visualization of renewable vs. non-renewable energy usage
+
+## Technology Stack
+
+- **Framework**: Next.js 15.4.5 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **Charts**: Recharts
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/0g-labs/0impact-climate.git
+cd 0impact-climate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+### Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Sources & Methodology
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The emissions calculations are based on:
 
-## Deploy on Vercel
+- **StorageScan**: Real-time data on 928 active storage miners
+- **Testnet Metrics**: 63 validators currently active
+- **Hardware Assumptions**: Conservative power estimates per node type
+- **Carbon Intensity**: Global average of 0.5 kg CO₂/kWh
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+See `docs/strategy.md` for the complete emissions estimation methodology.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+0impact-climate/
+├── app/
+│   ├── components/        # React components
+│   ├── lib/              # Data models and utilities
+│   ├── globals.css       # Global styles with ØG design system
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Main dashboard page
+├── public/
+│   ├── images/           # Static images
+│   └── videos/           # Background videos
+├── docs/                 # Documentation and methodology
+└── README.md
+```
+
+## Design System
+
+The dashboard follows ØG's official design system with:
+- Purple gradient color palette (#b75fff to #320071)
+- Dark theme with high contrast
+- Geist font family
+- Glass morphism effects on cards
+
+## Contributing
+
+We welcome contributions! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- ØG Labs for providing the infrastructure and data
+- The ØG community for supporting sustainable AI development
+
+---
+
+Built with 💜 by ØG Labs - Building AI That Puts Our Planet First
