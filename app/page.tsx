@@ -43,7 +43,7 @@ export default function Home() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 brightness-100"
         >
           <source 
             src="/videos/seamless-composability.mp4"
@@ -58,7 +58,7 @@ export default function Home() {
             backgroundSize: '600px 600px'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 md:from-black/80 md:via-black/70 md:to-black/80" />
       </div>
 
       {/* Header */}

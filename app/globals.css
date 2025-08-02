@@ -325,3 +325,20 @@ a, button {
   background-size: 200% 200%;
   animation: gradient-shift 15s ease infinite;
 }
+
+/* Fix for mobile video opacity */
+@media (max-width: 768px) {
+  video {
+    -webkit-filter: brightness(1.2) contrast(1.1);
+    filter: brightness(1.2) contrast(1.1);
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  video {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+  }
+}
