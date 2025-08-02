@@ -24,10 +24,10 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
         <div className="dashboard-card">
           <p className="text-white font-medium mb-2">{label}</p>
           <div className="space-y-1">
-            <p className="text-purple-1 text-sm">
+            <p className="text-sm" style={{color: '#b75fff'}}>
               Emissions: {payload[0].value.toFixed(1)} tons CO₂
             </p>
-            <p className="text-purple-2 text-sm">
+            <p className="text-sm" style={{color: '#4d65ff'}}>
               Energy: {payload[1].value.toFixed(0)} MWh
             </p>
           </div>
@@ -52,12 +52,12 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
         >
           <defs>
             <linearGradient id="colorEmissions" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="var(--purple-1)" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="var(--purple-1)" stopOpacity={0.1}/>
+              <stop offset="5%" stopColor="#b75fff" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#b75fff" stopOpacity={0.1}/>
             </linearGradient>
             <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="var(--purple-2)" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="var(--purple-2)" stopOpacity={0.1}/>
+              <stop offset="5%" stopColor="#4d65ff" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#4d65ff" stopOpacity={0.1}/>
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--neutral-dark)" opacity={0.5} />
@@ -91,7 +91,7 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
             yAxisId="left"
             type="monotone"
             dataKey="emissions"
-            stroke="var(--purple-1)"
+            stroke="#b75fff"
             fillOpacity={1}
             fill="url(#colorEmissions)"
             strokeWidth={2}
@@ -102,7 +102,7 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
             yAxisId="right"
             type="monotone"
             dataKey="energy"
-            stroke="var(--purple-2)"
+            stroke="#4d65ff"
             fillOpacity={1}
             fill="url(#colorEnergy)"
             strokeWidth={2}

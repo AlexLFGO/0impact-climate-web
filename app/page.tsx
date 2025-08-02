@@ -6,7 +6,7 @@ import { Leaf, Zap, TrendingDown, Activity, Wind } from 'lucide-react';
 import { MetricCard } from './components/MetricCard';
 import { EmissionsChart } from './components/EmissionsChart';
 import { NetworkStatus } from './components/NetworkStatus';
-import { RenewableEnergy } from './components/RenewableEnergy';
+import { CarbonOffsetScanner } from './components/CarbonOffsetScanner';
 import { LiveCounter } from './components/LiveCounter';
 import { LiveEmissions } from './components/LiveEmissions';
 import { EmissionsMethodology } from './components/EmissionsMethodology';
@@ -127,10 +127,10 @@ export default function Home() {
             delay={0.2}
           />
           <MetricCard
-            title="Active Validators"
-            value={<LiveCounter value={63} increment={0} decimals={0} />}
-            unit="carbon-aware nodes"
-            icon={Wind}
+            title="Total Network Nodes"
+            value={metrics.totalNodes.toLocaleString()}
+            unit="across all layers"
+            icon={Activity}
             delay={0.3}
           />
         </div>
@@ -170,21 +170,23 @@ export default function Home() {
             <TrendingDown className="w-6 h-6 text-purple-400" />
             Emissions & Energy Trends
           </h3>
-          <div className="dashboard-card">
-            <EmissionsChart data={historicalData} height={400} />
+          <div className="dashboard-card !p-3 md:!p-6">
+            <div className="h-[250px] md:h-[400px]">
+              <EmissionsChart data={historicalData} height={typeof window !== 'undefined' && window.innerWidth < 768 ? 250 : 400} />
+            </div>
           </div>
         </motion.section>
 
 
 
-        {/* Renewable Energy Mix */}
+        {/* ØG Impact Registry */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
           className="mb-12"
         >
-          <RenewableEnergy renewablePercentage={45} />
+          <CarbonOffsetScanner />
         </motion.section>
 
         {/* Emissions Methodology */}
