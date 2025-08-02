@@ -26,7 +26,7 @@ export default function Home() {
         
         {/* Subtle hype text at top */}
         <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
-          <p className="text-gray-400 text-sm font-mono tracking-wider opacity-60 animate-pulse">
+          <p className="text-gray-400 text-sm font-mono tracking-wider opacity-60 animate-pulse whitespace-nowrap">
             The Future is Loading...
           </p>
         </div>
