@@ -8,7 +8,6 @@ import { EmissionsChart } from './components/EmissionsChart';
 import { NetworkStatus } from './components/NetworkStatus';
 import { CarbonOffsetScanner } from './components/CarbonOffsetScanner';
 import { LiveCounter } from './components/LiveCounter';
-import { LiveEmissions } from './components/LiveEmissions';
 import { EmissionsMethodology } from './components/EmissionsMethodology';
 import { 
   generateNetworkMetrics, 
@@ -134,16 +133,6 @@ export default function Home() {
             delay={0.3}
           />
         </div>
-
-        {/* Live Network Impact */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-12"
-        >
-          <LiveEmissions />
-        </motion.section>
 
         {/* Network Status */}
         <motion.section
