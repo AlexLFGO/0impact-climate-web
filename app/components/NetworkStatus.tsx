@@ -68,8 +68,8 @@ export function NetworkStatus({ layers }: NetworkStatusProps) {
               </div>
               
               <div className="flex justify-between items-center">
-                <span className="text-xs text-neutral-light">Efficiency</span>
-                <span className="text-sm font-semibold text-purple-1">
+                <span className="text-xs text-neutral-light" title="Energy efficiency vs traditional cloud infrastructure">Efficiency</span>
+                <span className="text-sm font-semibold text-purple-1" title="Energy efficiency vs traditional cloud infrastructure">
                   {layer.efficiency.toFixed(1)}%
                 </span>
               </div>

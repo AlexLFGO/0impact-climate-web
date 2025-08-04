@@ -102,35 +102,27 @@ export default function Home() {
         </motion.div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <MetricCard
             title="Daily Carbon Offset"
             value={Math.floor(metrics.totalEmissions * 0.85).toLocaleString()}
-            unit="kg CO₂ prevented"
+            unit="kg CO₂"
             icon={Leaf}
             delay={0}
-          />
-          <MetricCard
-            title="Clean Energy Used"
-            value={metrics.totalEnergy}
-            unit="MWh/year"
-            change={-12.5}
-            icon={Zap}
-            delay={0.1}
           />
           <MetricCard
             title="Trees Equivalent"
             value={Math.round(metrics.totalEmissions * 16.5)}
             unit="trees planted"
             icon={Wind}
-            delay={0.2}
+            delay={0.1}
           />
           <MetricCard
             title="Total Network Nodes"
             value={metrics.totalNodes.toLocaleString()}
             unit="across all layers"
             icon={Activity}
-            delay={0.3}
+            delay={0.2}
           />
         </div>
 
@@ -141,10 +133,11 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-12"
         >
-          <h3 className="text-3xl font-light mb-6 flex items-center gap-3 text-white">
+          <h3 className="text-3xl font-light mb-2 flex items-center gap-3 text-white">
             <Activity className="w-6 h-6 text-purple-400" />
             Carbon-Optimized Network Layers
           </h3>
+          <p className="text-sm text-neutral-light mb-6">Efficiency shows energy savings compared to traditional cloud infrastructure</p>
           <NetworkStatus layers={layerMetrics} />
         </motion.section>
 
@@ -178,21 +171,11 @@ export default function Home() {
           <CarbonOffsetScanner />
         </motion.section>
 
-        {/* Emissions Methodology */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          className="mb-12"
-        >
-          <EmissionsMethodology />
-        </motion.section>
-
         {/* Carbon-Aware Consensus */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.1 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
           className="mb-12"
         >
           <div className="dashboard-card">
@@ -227,8 +210,35 @@ export default function Home() {
                 Result: <span className="text-purple-400 font-normal">Every block is carbon neutral</span> by design.
                 The more the network grows, the more offsets it generates.
               </p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="mt-6"
+              >
+                <p className="text-sm text-neutral-light">
+                  Stake to the <span className="text-purple-300">Impact Engine validator</span> to participate in carbon-neutral consensus
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-1 ml-2 text-purple-300 hover:text-purple-200 transition-colors duration-300"
+                  >
+                    Learn how
+                    <span className="text-xs">→</span>
+                  </a>
+                </p>
+              </motion.div>
             </div>
           </div>
+        </motion.section>
+
+        {/* Emissions Methodology */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="mb-12"
+        >
+          <EmissionsMethodology />
         </motion.section>
       </main>
 
