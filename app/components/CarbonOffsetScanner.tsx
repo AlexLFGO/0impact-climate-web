@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Scan, Leaf, CheckCircle, Clock, TrendingDown, Hash, Search } from 'lucide-react';
+import { Scan, Leaf, CheckCircle, Clock, TrendingDown, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Transaction {
   id: string;
@@ -22,6 +22,8 @@ export function CarbonOffsetScanner() {
   const [totalOffsetToday, setTotalOffsetToday] = useState(324.56);
   const [searchQuery, setSearchQuery] = useState('');
   const [allTransactions, setAllTransactions] = useState<Transaction[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 5;
 
   // Generate mock transaction data
   const generateTransaction = (): Transaction => {
@@ -36,7 +38,7 @@ export function CarbonOffsetScanner() {
       timestamp: new Date(),
       type,
       gasUsed,
-      co2Offset: gasUsed * 0.0000012, // Mock calculation
+      co2Offset: gasUsed * 0.00002 + Math.random() * 0.5, // Mock calculation in kg
       status: 'confirmed',
       validator: '0g1val' + Math.random().toString(36).substring(2, 8)
     };
@@ -98,90 +100,64 @@ export function CarbonOffsetScanner() {
     return `${Math.floor(diff / 3600000)}h ago`;
   };
 
-  // Filter transactions based on search
-  useEffect(() => {
-    if (!searchQuery) {
-      setTransactions(allTransactions.slice(0, 10));
-    } else {
-      const filtered = allTransactions.filter(tx => 
+  // Filter and paginate transactions
+  const filteredTransactions = searchQuery 
+    ? allTransactions.filter(tx => 
         tx.hash.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tx.validator.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tx.type.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setTransactions(filtered.slice(0, 10));
-    }
-  }, [searchQuery, allTransactions]);
+      )
+    : allTransactions;
+
+  const totalPages = Math.ceil(filteredTransactions.length / transactionsPerPage);
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const paginatedTransactions = filteredTransactions.slice(startIndex, startIndex + transactionsPerPage);
+
+  // Reset to page 1 when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   return (
-    <div className="dashboard-card">
+    <div className="dashboard-card p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-light flex items-center gap-3 text-white">
-          <Scan className="w-6 h-6 text-purple-400" />
-          ØG Impact Registry
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-light flex items-center gap-2 sm:gap-3 text-white">
+          <Scan className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-400" />
+          Impact Scanner
         </h3>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsLive(!isLive)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all text-xs sm:text-sm ${
             isLive 
               ? 'bg-green-500/20 text-green-400' 
               : 'bg-neutral-dark text-neutral-light'
           }`}
         >
-          <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-neutral-light'}`} />
+          <div className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-neutral-light'}`} />
           {isLive ? 'Live' : 'Paused'}
         </motion.button>
       </div>
 
       {/* Search Bar */}
       <div className="mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-light" />
+        <div className="relative group w-full">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-light group-focus-within:text-purple-400 transition-colors" />
           <input
             type="text"
-            placeholder="Search by transaction hash, validator, or type..."
+            placeholder="Search transactions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-neutral-darker border border-purple-500/20 rounded-lg text-white placeholder-neutral-light focus:outline-none focus:border-purple-500/50 transition-colors"
+            className="w-full pl-12 pr-4 py-3 bg-neutral-darker border border-purple-500/20 rounded-lg text-white placeholder-neutral-light focus:outline-none focus:border-purple-500/50 focus:bg-neutral-darker/70 transition-all text-base"
           />
         </div>
       </div>
 
-      {/* Daily Offset Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="p-4 bg-gradient-to-br from-purple-500/10 to-transparent rounded-lg border border-purple-500/20">
-          <p className="text-xs text-neutral-light mb-1">24h Carbon Offset</p>
-          <p className="text-2xl font-light text-white">
-            {totalOffsetToday.toFixed(2)}
-            <span className="text-sm text-neutral-light ml-1">kg CO₂</span>
-          </p>
-        </div>
-        <div className="p-4 bg-gradient-to-br from-blue-500/10 to-transparent rounded-lg border border-blue-500/20">
-          <p className="text-xs text-neutral-light mb-1">Transactions Offset</p>
-          <p className="text-2xl font-light text-white">
-            {(transactions.length * 142).toLocaleString()}
-            <span className="text-sm text-neutral-light ml-1">today</span>
-          </p>
-        </div>
-        <div className="p-4 bg-gradient-to-br from-green-500/10 to-transparent rounded-lg border border-green-500/20">
-          <p className="text-xs text-neutral-light mb-1">Offset Rate</p>
-          <p className="text-2xl font-light text-white">
-            100%
-            <span className="text-sm text-neutral-light ml-1">automatic</span>
-          </p>
-        </div>
-      </div>
-
       {/* Transaction List */}
-      <div className="space-y-2 max-h-[400px] overflow-y-auto">
-        <div className="text-xs text-neutral-light uppercase tracking-wider mb-3 flex items-center gap-2">
-          <Hash className="w-3 h-3" />
-          On-Chain Impact Records
-        </div>
-        
+      <div className="space-y-3">
         <AnimatePresence mode="popLayout">
-          {transactions.map((tx) => (
+          {paginatedTransactions.map((tx) => (
             <motion.div
               key={tx.id}
               layout
@@ -189,7 +165,7 @@ export function CarbonOffsetScanner() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="p-4 rounded-lg border border-purple-500/20 bg-neutral-darker/50 hover:border-purple-500/40 transition-all cursor-pointer"
+              className="p-4 rounded-lg border border-purple-500/20 bg-neutral-darker/50 hover:border-purple-500/40 hover:bg-neutral-darker/70 transition-all cursor-pointer group"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -208,7 +184,7 @@ export function CarbonOffsetScanner() {
                     href={`https://explorer.0g.ai/tx/${tx.hash}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-mono text-purple-400 hover:text-purple-300 truncate block transition-colors"
+                    className="text-xs font-mono text-purple-400 hover:text-purple-300 truncate block transition-colors break-all sm:break-normal"
                   >
                     {tx.hash}
                   </a>
@@ -221,7 +197,7 @@ export function CarbonOffsetScanner() {
                   <div className="flex items-center gap-2 justify-end mb-1">
                     <Leaf className="w-3 h-3 text-green-400" />
                     <p className="text-sm font-light text-green-400">
-                      {tx.co2Offset.toFixed(6)} kg
+                      {tx.co2Offset.toFixed(2)} kg CO₂
                     </p>
                   </div>
                   <p className="text-xs text-neutral-light">
@@ -229,8 +205,8 @@ export function CarbonOffsetScanner() {
                   </p>
                   {tx.status === 'confirmed' && (
                     <div className="flex items-center gap-1 justify-end mt-1">
-                      <CheckCircle className="w-3 h-3 text-green-400" />
-                      <span className="text-xs text-green-400">Offset</span>
+                      <CheckCircle className="w-3 h-3 text-blue-400" />
+                      <span className="text-xs text-blue-400">0impact.ai</span>
                     </div>
                   )}
                 </div>
@@ -240,26 +216,65 @@ export function CarbonOffsetScanner() {
         </AnimatePresence>
       </div>
 
-      {/* Carbon-Aware Consensus Info */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-6 p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg"
-      >
-        <div className="flex items-start gap-3">
-          <TrendingDown className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm text-white font-normal mb-1">
-              ØImpact Engine
-            </p>
-            <p className="text-xs text-neutral-light leading-relaxed">
-              Every transaction is transparently recorded on-chain with automatic carbon offset allocation. 
-              View each transaction on ØG Explorer to verify offset purchases and validator participation.
-            </p>
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-4 border-t border-purple-500/20">
+          <p className="text-xs text-neutral-light text-center sm:text-left">
+            Showing {startIndex + 1}-{Math.min(startIndex + transactionsPerPage, filteredTransactions.length)} of {filteredTransactions.length}
+          </p>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </motion.button>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum;
+                if (totalPages <= 5) {
+                  pageNum = i + 1;
+                } else if (currentPage <= 3) {
+                  pageNum = i + 1;
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i;
+                } else {
+                  pageNum = currentPage - 2 + i;
+                }
+                
+                return (
+                  <motion.button
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-8 h-8 rounded-lg text-sm transition-all ${
+                      currentPage === pageNum
+                        ? 'bg-purple-500/30 text-white border border-purple-500/50'
+                        : 'bg-neutral-darker border border-purple-500/20 text-neutral-light hover:border-purple-500/40'
+                    }`}
+                  >
+                    {pageNum}
+                  </motion.button>
+                );
+              })}
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
           </div>
         </div>
-      </motion.div>
+      )}
+
     </div>
   );
 }

@@ -15,7 +15,7 @@ interface EmissionsChartProps {
   height?: number;
 }
 
-export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
+export function EmissionsChart({ data, height }: EmissionsChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
 
   const CustomTooltip = ({ active, payload, label }: any) => {
@@ -45,10 +45,15 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
       transition={{ duration: 0.5 }}
       className="w-full"
     >
-      <ResponsiveContainer width="100%" height={height}>
+      <ResponsiveContainer width="100%" height={height || 400}>
         <AreaChart
           data={data}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          margin={{ 
+            top: 10, 
+            right: 10, 
+            left: -20, 
+            bottom: 0 
+          }}
         >
           <defs>
             <linearGradient id="colorEmissions" x1="0" y1="0" x2="0" y2="1">
@@ -74,12 +79,14 @@ export function EmissionsChart({ data, height = 300 }: EmissionsChartProps) {
             stroke="var(--neutral-light)"
             tick={{ fill: 'var(--neutral-light)', fontSize: 12 }}
             yAxisId="left"
+            width={40}
           />
           <YAxis 
             stroke="var(--neutral-light)"
             tick={{ fill: 'var(--neutral-light)', fontSize: 12 }}
             yAxisId="right"
             orientation="right"
+            width={40}
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend 

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Activity, Server, HardDrive, Cpu, Users } from 'lucide-react';
+import { Activity, Server, HardDrive, Cpu, Users, Info } from 'lucide-react';
 import { LayerMetrics } from '../lib/types';
 
 interface NetworkStatusProps {
@@ -37,7 +37,7 @@ export function NetworkStatus({ layers }: NetworkStatusProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="dashboard-card"
+            className="dashboard-card relative overflow-visible"
           >
             <div className="flex items-center justify-between mb-3">
               <h3 className="metric-label">{layer.layer}</h3>
@@ -48,7 +48,21 @@ export function NetworkStatus({ layers }: NetworkStatusProps) {
             
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-xs text-neutral-light">Nodes</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-neutral-light">Nodes</span>
+                  <div className="group relative">
+                    <Info className="w-3 h-3 text-neutral-light/50 cursor-help" />
+                    <div className="absolute z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 bottom-full left-0 mb-2 w-48 p-2 bg-neutral-darker border border-purple-500/20 rounded-lg shadow-xl">
+                      <p className="text-xs text-white leading-relaxed">
+                        {layer.layer === 'ØG Chain' && 'Validators securing the network through consensus'}
+                        {layer.layer === 'ØG Storage' && 'Nodes providing decentralized data storage with PoRA'}
+                        {layer.layer === 'ØG DA' && 'Nodes ensuring data availability for the network'}
+                        {layer.layer === 'ØG Compute' && 'GPU nodes providing AI inference capabilities'}
+                        {layer.layer === 'Alignment Network' && 'Community nodes participating in alignment'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <motion.span 
                   className="text-sm font-semibold text-white"
                   key={layer.nodes}
@@ -61,31 +75,50 @@ export function NetworkStatus({ layers }: NetworkStatusProps) {
               </div>
               
               <div className="flex justify-between items-center">
-                <span className="text-xs text-neutral-light">Power</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-neutral-light">Power</span>
+                  <div className="group relative">
+                    <Info className="w-3 h-3 text-neutral-light/50 cursor-help" />
+                    <div className="absolute z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 bottom-full left-0 mb-2 w-48 p-2 bg-neutral-darker border border-purple-500/20 rounded-lg shadow-xl">
+                      <p className="text-xs text-white leading-relaxed">
+                        {layer.layer === 'ØG Chain' && 'Based on 200W per validator node (8-core server)'}
+                        {layer.layer === 'ØG Storage' && 'Based on 150W per storage node with PoRA mining'}
+                        {layer.layer === 'ØG DA' && 'Based on 120W per DA node (moderate utilization)'}
+                        {layer.layer === 'ØG Compute' && 'Based on 150W average per GPU node'}
+                        {layer.layer === 'Alignment Network' && 'Based on community device mix'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className="text-sm font-semibold text-purple-2">
                   {layer.power} kW
                 </span>
               </div>
               
               <div className="flex justify-between items-center">
-                <span className="text-xs text-neutral-light" title="Energy efficiency vs traditional cloud infrastructure">Efficiency</span>
-                <span className="text-sm font-semibold text-purple-1" title="Energy efficiency vs traditional cloud infrastructure">
-                  {layer.efficiency.toFixed(1)}%
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-neutral-light">Emissions</span>
+                  <div className="group relative">
+                    <Info className="w-3 h-3 text-neutral-light/50 cursor-help" />
+                    <div className="absolute z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 bottom-full left-0 mb-2 w-56 p-2 bg-neutral-darker border border-purple-500/20 rounded-lg shadow-xl">
+                      <p className="text-xs text-white leading-relaxed">
+                        Daily CO₂ emissions based on node power consumption and global average carbon intensity (0.5 kg CO₂/kWh). All emissions will be offset through ØImpact Engine.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <span className="text-sm font-semibold text-purple-1">
+                  {layer.emissions} kg/day
                 </span>
               </div>
               
               <div className="mt-3">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs text-neutral-light">Utilization</span>
-                  <span className="text-xs text-neutral-light">{layer.utilization.toFixed(0)}%</span>
-                </div>
-                <div className="w-full bg-neutral-dark rounded-full h-2">
-                  <motion.div
-                    className="h-2 rounded-full bg-purple-1"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${layer.utilization}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
-                  />
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-neutral-light">Network Status</span>
+                  <span className="text-xs text-green-400 flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                    Testnet Active
+                  </span>
                 </div>
               </div>
             </div>

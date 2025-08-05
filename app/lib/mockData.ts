@@ -106,7 +106,7 @@ export function generateLayerMetrics(): LayerMetrics[] {
       nodes: 63,
       power: 12.6, // 63 * 0.2 kW
       emissions: Math.round(12.6 * 24 * carbonIntensity), // Daily kg CO2
-      efficiency: 85 + Math.random() * 10,
+      efficiency: 75 + Math.random() * 10, // vs hyperscaler data centers
       utilization: 50 + Math.random() * 20 // Moderate utilization per strategy.md
     },
     {
@@ -114,7 +114,7 @@ export function generateLayerMetrics(): LayerMetrics[] {
       nodes: 928,
       power: 139.2, // 928 * 0.15 kW
       emissions: Math.round(139.2 * 24 * carbonIntensity), // ~1,670 kg CO2/day
-      efficiency: 90 + Math.random() * 8,
+      efficiency: 80 + Math.random() * 10, // distributed storage vs S3/Azure
       utilization: 70 + Math.random() * 10 // 70% CPU load for PoRA
     },
     {
@@ -122,7 +122,7 @@ export function generateLayerMetrics(): LayerMetrics[] {
       nodes: 150,
       power: 18.0, // 150 * 0.12 kW
       emissions: Math.round(18.0 * 24 * carbonIntensity), // ~216 kg CO2/day
-      efficiency: 88 + Math.random() * 10,
+      efficiency: 70 + Math.random() * 10, // vs centralized DA solutions
       utilization: 30 + Math.random() * 20 // 30-50% utilization
     },
     {
@@ -130,7 +130,7 @@ export function generateLayerMetrics(): LayerMetrics[] {
       nodes: 50,
       power: 7.5, // 50 * 0.15 kW (30% GPU utilization)
       emissions: Math.round(7.5 * 24 * carbonIntensity), // ~90 kg CO2/day
-      efficiency: 75 + Math.random() * 15,
+      efficiency: 65 + Math.random() * 15, // vs cloud GPU instances
       utilization: 30 + Math.random() * 10 // 30% average GPU utilization
     },
     {
@@ -138,7 +138,7 @@ export function generateLayerMetrics(): LayerMetrics[] {
       nodes: 1000,
       power: 100.0, // 1000 * 0.1 kW
       emissions: Math.round(100.0 * 24 * carbonIntensity), // ~1,200 kg CO2/day
-      efficiency: 95 + Math.random() * 5,
+      efficiency: 85 + Math.random() * 10, // community devices vs dedicated servers
       utilization: 20 + Math.random() * 10 // 20% utilization for monitoring
     }
   ];
