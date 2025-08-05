@@ -315,7 +315,7 @@ export default function Home() {
               href="#"
               className="inline-flex items-center gap-3 px-6 sm:px-10 py-5 sm:py-5 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl transition-all duration-300 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] group text-lg font-semibold text-white"
             >
-              <span className="text-lg font-semibold">Stake to</span>
+              <span className="text-lg font-semibold text-white/70">Stake to</span>
               <Image
                 src="/images/fulllogo_transparent_nobuffer.png"
                 alt="ØImpact Engine"
