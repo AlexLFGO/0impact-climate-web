@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Leaf, TrendingDown, Activity, Server, HardDrive, Database, Cpu, Users } from 'lucide-react';
+import { Leaf, TrendingDown, Activity, Server, HardDrive, Database, Cpu, Users, Zap } from 'lucide-react';
 import { MetricCard } from './components/MetricCard';
 import { NetworkStatus } from './components/NetworkStatus';
 import { CarbonOffsetScanner } from './components/CarbonOffsetScanner';
@@ -109,7 +109,7 @@ export default function Home() {
           </h2>
           <div className="max-w-2xl mx-auto px-4">
             <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed">
-              The first AI blockchain <span className="text-purple-400 font-normal">carbon-negative from genesis</span>.
+              The first AI blockchain <span className="text-purple-400 font-normal">carbon-neutral from genesis</span>.
             </p>
           </div>
         </motion.div>
@@ -293,6 +293,69 @@ export default function Home() {
           <CarbonOffsetScanner />
         </motion.section>
 
+        {/* How it Works */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.52 }}
+          className="mb-16"
+        >
+          <div className="px-1 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-light text-white mb-2">How it Works</h2>
+            <p className="text-white/60 text-sm sm:text-base">Three steps to carbon-neutral infrastructure</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="dashboard-card p-6 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl" />
+              <div className="relative z-10">
+                <div className="text-4xl font-light text-purple-400 mb-4">01</div>
+                <h3 className="text-lg font-normal text-white mb-2">Monitor Network Impact</h3>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Track real-time energy consumption across 2,000+ ØG nodes using hardware specifications and global carbon intensity data.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="dashboard-card p-6 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-2xl" />
+              <div className="relative z-10">
+                <div className="text-4xl font-light text-green-400 mb-4">02</div>
+                <h3 className="text-lg font-normal text-white mb-2">Stake to ØImpact Engine</h3>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Validators donate 100% of staking commissions to purchase verified carbon credits directly on-chain.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="dashboard-card p-6 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-2xl" />
+              <div className="relative z-10">
+                <div className="text-4xl font-light text-blue-400 mb-4">03</div>
+                <h3 className="text-lg font-normal text-white mb-2">Create Real World Impact</h3>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Automated carbon credit purchases create verifiable environmental impact, tracked transparently on-chain through 0impact.ai.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
         {/* ØImpact Engine Section */}
         <motion.section
           id="impact-engine"
@@ -308,7 +371,7 @@ export default function Home() {
             </h2>
             
             <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 md:mb-12 px-4">
-              100% commission directed to verified real world impact.
+              Every stake powers verified environmental action.
             </p>
             
             <a
@@ -333,54 +396,102 @@ export default function Home() {
         </motion.section>
 
 
+        {/* Methodology Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mb-16"
+        >
+          <div className="px-1 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-light text-white mb-2">Methodology</h2>
+            <p className="text-white/60 text-sm sm:text-base">Transparent calculations for accurate impact measurement</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
+              className="dashboard-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <Database className="w-5 h-5 text-purple-400" />
+                <h4 className="text-base font-normal text-white">Data Sources</h4>
+              </div>
+              <p className="text-sm text-white/60 leading-relaxed">
+                Real-time metrics from StorageScan API, testnet validators, 
+                and estimated node distributions based on network architecture.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="dashboard-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <Activity className="w-5 h-5 text-green-400" />
+                <h4 className="text-base font-normal text-white">Power Modeling</h4>
+              </div>
+              <p className="text-sm text-white/60 leading-relaxed">
+                Per-node power: Validators 200W, Storage 150W, DA 120W, 
+                Compute 150W, Alignment 100W. Based on typical hardware specs.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
+              className="dashboard-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <Zap className="w-5 h-5 text-blue-400" />
+                <h4 className="text-base font-normal text-white">Carbon Intensity</h4>
+              </div>
+              <p className="text-sm text-white/60 leading-relaxed">
+                Global average 0.5 kg CO₂/kWh applied uniformly. 
+                Future updates will include regional grid intensities.
+              </p>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="mt-6 text-center"
+          >
+            <p className="text-xs text-white/60">
+              Estimates based on testnet data and conservative assumptions. 
+              Methodology reviewed quarterly.
+            </p>
+          </motion.div>
+        </motion.section>
+
       </main>
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-purple-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="mb-4">
-                <Image 
-                  src="/0g-white-logo.png" 
-                  alt="ØG Logo" 
-                  width={60} 
-                  height={24}
-                  className="h-8 w-auto"
-                />
-              </div>
-              <p className="text-neutral-light text-sm">
-                Decentralized AI Operating System<br />
-                Building sustainable infrastructure for the future of AI.
-              </p>
+          <div className="flex flex-col items-center text-center">
+            <div className="mb-6">
+              <Image 
+                src="/0g-white-logo.png" 
+                alt="ØG Logo" 
+                width={60} 
+                height={24}
+                className="h-8 w-auto"
+              />
             </div>
-            <div>
-              <h4 className="font-normal text-white mb-3">Current Impact</h4>
-              <ul className="space-y-2 text-sm text-neutral-light">
-                <li>2,191 testnet nodes</li>
-                <li>277 kW total power draw</li>
-                <li>3.3 tons CO₂/day</li>
-                <li>100% offset via ØImpact Engine</li>
-              </ul>
+            <p className="text-neutral-light text-sm mb-8">
+              Building sustainable infrastructure for the future of AI
+            </p>
+            <div className="text-neutral-light text-xs">
+              <p>© 2024 ØG Labs. All rights reserved</p>
             </div>
-            <div>
-              <h4 className="font-normal text-white mb-3">Architecture</h4>
-              <ul className="space-y-2 text-sm text-neutral-light">
-                <li>63 validators (200W each)</li>
-                <li>928 storage nodes (150W)</li>
-                <li>~150 DA nodes (120W)</li>
-                <li>~1,050 other nodes</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-normal text-white mb-3">Methodology</h4>
-              <p className="text-sm text-neutral-light">
-                Emissions calculated using hardware power specs and global average carbon intensity (0.5 kg CO₂/kWh). Real-time node counts from testnet validators and StorageScan.
-              </p>
-            </div>
-          </div>
-          <div className="border-t border-purple-500/20 pt-8 text-center text-neutral-light text-xs">
-            <p>© 2024 ØG Labs. All rights reserved · Carbon estimates based on testnet data and conservative hardware assumptions</p>
           </div>
         </div>
       </footer>
