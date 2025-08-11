@@ -102,7 +102,7 @@ export default function Home() {
           className="text-center mb-20 pt-12 -mx-4 sm:-mx-6 lg:-mx-8"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-6 md:mb-8 leading-[1.2] px-4">
-            <span className="text-white block">Zero Emissions.</span>
+            <span className="text-white block">Ø Emissions.</span>
             <span className="gradient-text block mt-2">
               Infinite&nbsp;Scale.
             </span>
