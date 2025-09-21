@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Leaf, TrendingDown, Activity, Server, HardDrive, Database, Cpu, Users, Zap } from 'lucide-react';
+import { Leaf, TrendingDown, Activity, Server, HardDrive, Database, Cpu, Users, Zap, Heart, BarChart3, Scan, CheckCircle, FileText } from 'lucide-react';
 import { MetricCard } from './components/MetricCard';
 import { NetworkStatus } from './components/NetworkStatus';
 import { CarbonOffsetScanner } from './components/CarbonOffsetScanner';
@@ -114,45 +114,36 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Key Metrics */}
-        <div className="px-1 mb-3 flex items-center justify-between">
-          <h2 className="text-xs sm:text-sm text-neutral-light uppercase tracking-wider">Network Overview</h2>
-          <div className="flex items-center gap-2 text-[10px] sm:text-xs text-green-400">
-            <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-            <span>Live data • Updates every 30s</span>
+        {/* How it Works */}
+        <div className="px-1 mb-2 flex items-center justify-between">
+          <h2 className="text-[10px] sm:text-xs text-neutral-light uppercase tracking-wider">How it Works</h2>
+          <div className="flex items-center gap-2 text-[9px] sm:text-[10px] text-green-400">
+            <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+            <span>Automated</span>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="dashboard-card relative overflow-hidden p-4 md:p-5"
+            className="dashboard-card relative overflow-hidden p-3 md:p-4"
           >
-            <div className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl" />
+            <motion.div
+              className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-light text-neutral-light">Network Scale</p>
-                <Activity className="w-4 h-4 text-purple-400" />
+              <div className="flex items-center gap-2 mb-2">
+                <Activity className="w-4 h-4 text-purple-400 animate-pulse" />
+                <h3 className="text-sm md:text-base font-normal text-white">
+                  Live Tracking
+                </h3>
               </div>
-              <div className="space-y-2">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-light text-white">
-                    <LiveCounter value={metrics.totalNodes} decimals={0} increment={3} duration={10000} />
-                  </h3>
-                  <p className="text-xs text-neutral-light mt-0.5">active nodes</p>
-                </div>
-                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-purple-500/20">
-                  <div>
-                    <p className="text-[10px] text-neutral-light/70">Power Draw</p>
-                    <p className="text-sm md:text-base font-light text-purple-400">{(metrics.totalPower/1000).toFixed(2)} MW</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-neutral-light/70">Daily Emissions</p>
-                    <p className="text-sm md:text-base font-light text-white">{(metrics.totalEmissions / 1000).toFixed(1)} tCO₂</p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-[10px] md:text-xs text-neutral-light leading-relaxed">
+                Emissions calculated through continuous monitoring
+              </p>
             </div>
           </motion.div>
 
@@ -160,32 +151,23 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="dashboard-card relative overflow-hidden p-4 md:p-5"
+            className="dashboard-card relative overflow-hidden p-3 md:p-4"
           >
-            <div className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-2xl" />
+            <motion.div
+              className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-2xl"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+            />
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-light text-neutral-light">Carbon Impact</p>
-                <Leaf className="w-4 h-4 text-green-400" />
+              <div className="flex items-center gap-2 mb-2">
+                <Leaf className="w-4 h-4 text-green-400 animate-pulse" />
+                <h3 className="text-sm md:text-base font-normal text-white">
+                  Carbon Removal
+                </h3>
               </div>
-              <div className="space-y-2">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-light text-green-400">
-                    <LiveCounter value={324.56} decimals={2} increment={0.05} duration={8000} />
-                  </h3>
-                  <p className="text-xs text-neutral-light mt-0.5">tCO₂ removed</p>
-                </div>
-                <div className="pt-2 border-t border-green-500/20">
-                  <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-neutral-light/70">Estimated annual</span>
-                    <span className="text-white">~{Math.floor(324.56 * 365).toLocaleString()} tCO₂</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] mt-0.5">
-                    <span className="text-neutral-light/70">Network emissions</span>
-                    <span className="text-white">~{Math.floor(metrics.totalEmissions * 365 / 1000).toLocaleString()} tCO₂</span>
-                  </div>
-                </div>
-              </div>
+              <p className="text-[10px] md:text-xs text-neutral-light leading-relaxed">
+                Verified carbon credits actively remove CO₂
+              </p>
             </div>
           </motion.div>
 
@@ -193,95 +175,28 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="dashboard-card relative overflow-hidden p-4 md:p-5"
+            className="dashboard-card relative overflow-hidden p-3 md:p-4"
           >
-            <div className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-2xl" />
+            <motion.div
+              className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-2xl"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+            />
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-light text-neutral-light">Efficiency Metrics</p>
-                <TrendingDown className="w-4 h-4 text-blue-400" />
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="w-4 h-4 text-blue-400 animate-pulse" />
+                <h3 className="text-sm md:text-base font-normal text-white">
+                  On-Chain Proof
+                </h3>
               </div>
-              <div className="space-y-2">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-light text-white">
-                    <LiveCounter value={0.48} decimals={2} increment={0.01} duration={5000} />
-                  </h3>
-                  <p className="text-xs text-neutral-light mt-0.5">kWh per AI inference</p>
-                </div>
-                <div className="pt-2 border-t border-blue-500/20">
-                  <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-neutral-light/70">vs GPT-4 inference</span>
-                    <span className="text-blue-400">~10x lower</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] mt-0.5">
-                    <span className="text-neutral-light/70">Decentralized efficiency</span>
-                    <span className="text-blue-400">87%</span>
-                  </div>
-                </div>
-              </div>
+              <p className="text-[10px] md:text-xs text-neutral-light leading-relaxed">
+                Transactions displayed in the Impact Scanner
+              </p>
             </div>
           </motion.div>
         </div>
 
 
-        {/* ØG Architecture */}
-        <div className="px-1 mb-3">
-          <h2 className="text-xs sm:text-sm text-neutral-light uppercase tracking-wider">Layer Breakdown</h2>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-12 md:mb-16">
-            {layerMetrics.map((layer, index) => {
-              const icons = {
-                'ØG Chain': Server,
-                'ØG Storage': HardDrive,
-                'ØG DA': Database,
-                'ØG Compute': Cpu,
-                'Alignment Network': Users,
-              };
-              const colors = {
-                'ØG Chain': { icon: 'text-purple-400', glow: 'from-purple-500/10' },
-                'ØG Storage': { icon: 'text-blue-400', glow: 'from-blue-500/10' },
-                'ØG DA': { icon: 'text-green-400', glow: 'from-green-500/10' },
-                'ØG Compute': { icon: 'text-orange-400', glow: 'from-orange-500/10' },
-                'Alignment Network': { icon: 'text-pink-400', glow: 'from-pink-500/10' },
-              };
-              const Icon = icons[layer.layer as keyof typeof icons] || Server;
-              const color = colors[layer.layer as keyof typeof colors] || { icon: 'text-purple-400', glow: 'from-purple-500/10' };
-              
-              return (
-                <motion.div
-                  key={layer.layer}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
-                  className="dashboard-card relative overflow-hidden hover:scale-[1.02] transition-all duration-300 p-4 md:p-5"
-                >
-                  <div className={`absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br ${color.glow} to-transparent rounded-full blur-2xl`} />
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <Icon className={`w-5 h-5 ${color.icon}`} />
-                    </div>
-                    
-                    <h4 className="text-xs md:text-sm font-light text-white mb-1 truncate">{layer.layer}</h4>
-                    <p className="text-xl md:text-2xl font-light text-white mb-2 md:mb-3">
-                      {layer.nodes.toLocaleString()}
-                      <span className="text-xs text-neutral-light ml-1 hidden sm:inline">nodes</span>
-                    </p>
-                    
-                    <div className="space-y-2 text-xs">
-                      <div className="flex justify-between items-center">
-                        <span className="text-neutral-light/70">Power</span>
-                        <span className="text-white font-light">{layer.power} kW</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-neutral-light/70">Daily CO₂</span>
-                        <span className="text-white font-light">{layer.emissions} kg</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-        </div>
 
         {/* ØG Impact Scanner - Main Feature */}
         <motion.section
@@ -291,69 +206,6 @@ export default function Home() {
           className="mb-16"
         >
           <CarbonOffsetScanner />
-        </motion.section>
-
-        {/* How it Works */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.52 }}
-          className="mb-16"
-        >
-          <div className="px-1 mb-6">
-            <h2 className="text-2xl sm:text-3xl font-light text-white mb-2">How it Works</h2>
-            <p className="text-white/60 text-sm sm:text-base">Three steps to carbon-neutral infrastructure</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="dashboard-card p-6 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl" />
-              <div className="relative z-10">
-                <div className="text-4xl font-light text-purple-400 mb-4">01</div>
-                <h3 className="text-lg font-normal text-white mb-2">Monitor Network Impact</h3>
-                <p className="text-sm text-white/60 leading-relaxed">
-                  Track real-time energy consumption across 2,000+ ØG nodes using hardware specifications and global carbon intensity data.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="dashboard-card p-6 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-2xl" />
-              <div className="relative z-10">
-                <div className="text-4xl font-light text-green-400 mb-4">02</div>
-                <h3 className="text-lg font-normal text-white mb-2">Stake to ØImpact Engine</h3>
-                <p className="text-sm text-white/60 leading-relaxed">
-                  Validators donate 100% of staking commissions to purchase verified carbon credits directly on-chain.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="dashboard-card p-6 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-2xl" />
-              <div className="relative z-10">
-                <div className="text-4xl font-light text-blue-400 mb-4">03</div>
-                <h3 className="text-lg font-normal text-white mb-2">Create Real World Impact</h3>
-                <p className="text-sm text-white/60 leading-relaxed">
-                  Automated carbon credit purchases create verifiable environmental impact, tracked transparently on-chain through 0impact.ai.
-                </p>
-              </div>
-            </motion.div>
-          </div>
         </motion.section>
 
         {/* ØImpact Engine Section */}
@@ -369,29 +221,29 @@ export default function Home() {
               <span className="text-white block">What you stake today</span>
               <span className="gradient-text block mt-2">shapes tomorrow.</span>
             </h2>
-            
+
             <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 md:mb-12 px-4">
-              Every stake powers verified environmental action.
+              Competitive APY + Verified Climate Action
             </p>
-            
+
             <a
-              href="#"
-              className="inline-flex items-center gap-3 px-6 sm:px-10 py-5 sm:py-5 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl transition-all duration-300 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] group text-lg font-semibold text-white"
+              href="https://wallet.0g.ai/0gchain/staking/0gvaloper1679yqpnt00wxje5ysf3tqmfcfzl5krwc63wpr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 sm:px-10 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl transition-all duration-300 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] group text-lg font-semibold text-white"
+              style={{ height: 'auto', padding: '0 40px' }}
             >
-              <span className="text-lg font-semibold text-white/70">Stake to</span>
-              <Image
-                src="/images/fulllogo_transparent_nobuffer.png"
-                alt="ØImpact Engine"
-                width={140}
-                height={30}
-                className="h-6 sm:h-6 w-auto object-contain"
+              <span className="text-lg font-semibold text-white/70">Stake with</span>
+              <img
+                src="/0impact_logo.svg"
+                alt="0Impact"
+                width="120"
+                height="40"
+                style={{ display: 'block' }}
               />
               <span className="text-white/80 group-hover:translate-x-1 transition-transform">→</span>
             </a>
-            
-            <p className="text-sm text-neutral-light/70 mt-6">
-              0% APY • 100% RWI • Full Transparency
-            </p>
+
           </div>
         </motion.section>
 
@@ -403,72 +255,54 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-16"
         >
-          <div className="px-1 mb-6">
-            <h2 className="text-2xl sm:text-3xl font-light text-white mb-2">Methodology</h2>
-            <p className="text-white/60 text-sm sm:text-base">Transparent calculations for accurate impact measurement</p>
-          </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="px-1 mb-4">
+              <h2 className="text-[10px] sm:text-xs text-neutral-light uppercase tracking-wider mb-3 text-center">Methodology</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-xl mx-auto">
+                <div className="dashboard-card p-2 md:p-3">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Database className="w-3 h-3 text-purple-400" />
+                    <h4 className="text-xs md:text-sm font-normal text-white">Compliance & Standards</h4>
+                  </div>
+                  <p className="text-[9px] md:text-[10px] text-white/60 leading-relaxed mb-1.5">
+                    MiCA regulatory compliance and sustainability per EU standards.
+                  </p>
+                  <div className="space-y-1">
+                    <a href="https://4134984757-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FsEYMfeKUqxaOUwhkw6AT%2Fuploads%2Fgit-blob-6f0538c70e09bf3180519342bfc516355c7a12c0%2F0g-whitepaper.pdf?alt=media" target="_blank" rel="noopener noreferrer" className="text-[10px] text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1">
+                      <FileText className="w-2.5 h-2.5" />
+                      MiCA Whitepaper
+                    </a>
+                    <a href="https://archax.com/hubfs/dlt-sustainability-assessment.pdf" target="_blank" rel="noopener noreferrer" className="text-[10px] text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1">
+                      <FileText className="w-2.5 h-2.5" />
+                      Sustainability Assessment
+                    </a>
+                  </div>
+                </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
-              className="dashboard-card p-6"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <Database className="w-5 h-5 text-purple-400" />
-                <h4 className="text-base font-normal text-white">Data Sources</h4>
+                <div className="dashboard-card p-2 md:p-3">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Zap className="w-3 h-3 text-blue-400" />
+                    <h4 className="text-xs md:text-sm font-normal text-white">Verification Process</h4>
+                  </div>
+                  <p className="text-[9px] md:text-[10px] text-white/60 leading-relaxed mb-1.5">
+                    Carbon offsets verified through{' '}
+                    <a href="https://bridge.eco" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors">
+                      ecoBridge
+                    </a>.
+                  </p>
+                  <p className="text-[9px] md:text-[10px] text-white/80 leading-relaxed">
+                    All transactions recorded on-chain, available in Impact Scanner.
+                  </p>
+                </div>
               </div>
-              <p className="text-sm text-white/60 leading-relaxed">
-                Real-time metrics from StorageScan API, testnet validators, 
-                and estimated node distributions based on network architecture.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="dashboard-card p-6"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <Activity className="w-5 h-5 text-green-400" />
-                <h4 className="text-base font-normal text-white">Power Modeling</h4>
-              </div>
-              <p className="text-sm text-white/60 leading-relaxed">
-                Per-node power: Validators 200W, Storage 150W, DA 120W, 
-                Compute 150W, Alignment 100W. Based on typical hardware specs.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
-              className="dashboard-card p-6"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <Zap className="w-5 h-5 text-blue-400" />
-                <h4 className="text-base font-normal text-white">Carbon Intensity</h4>
-              </div>
-              <p className="text-sm text-white/60 leading-relaxed">
-                Global average 0.5 kg CO₂/kWh applied uniformly. 
-                Future updates will include regional grid intensities.
-              </p>
-            </motion.div>
-          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-6 text-center"
-          >
-            <p className="text-xs text-white/60">
-              Estimates based on testnet data and conservative assumptions. 
-              Methodology reviewed quarterly.
-            </p>
-          </motion.div>
+              <div className="mt-3 text-center">
+                <p className="text-[9px] text-white/50">
+                  Methodology aligned with EU standards. See whitepapers for details.
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.section>
 
       </main>
@@ -490,7 +324,12 @@ export default function Home() {
               Building sustainable infrastructure for the future of AI
             </p>
             <div className="text-neutral-light text-xs">
-              <p>© 2024 ØG Labs. All rights reserved</p>
+              <p className="flex items-center justify-center gap-1.5">
+                © 2025 ØG Labs. All rights reserved • Built with <Heart className="w-3 h-3 text-purple-400 fill-purple-400 inline" /> by{' '}
+                <a href="https://bridge.eco" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors">
+                  ecoBridge
+                </a>
+              </p>
             </div>
           </div>
         </div>

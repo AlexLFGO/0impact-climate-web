@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Scan, Leaf, CheckCircle, Clock, TrendingDown, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Scan, Leaf, CheckCircle, Clock, TrendingDown, Search, ChevronLeft, ChevronRight, Server, HardDrive, Database, Cpu, Users } from 'lucide-react';
 
 interface Transaction {
   id: string;
   hash: string;
   blockHeight: number;
   timestamp: Date;
-  type: 'validator' | 'storage' | 'compute' | 'da' | 'alignment';
+  type: 'chain' | 'storage' | 'compute' | 'da' | 'alignment';
   gasUsed: number;
   co2Offset: number;
   status: 'confirmed' | 'pending';
@@ -27,7 +27,7 @@ export function CarbonOffsetScanner() {
 
   // Generate mock transaction data
   const generateTransaction = (): Transaction => {
-    const types = ['validator', 'storage', 'compute', 'da', 'alignment'] as const;
+    const types = ['chain', 'storage', 'compute', 'da', 'alignment'] as const;
     const type = types[Math.floor(Math.random() * types.length)];
     const gasUsed = Math.floor(Math.random() * 50000) + 10000;
     
@@ -70,25 +70,35 @@ export function CarbonOffsetScanner() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isLive]);
+  }, [isLive, searchQuery]);
+
+  const getTypeIcon = (type: Transaction['type']) => {
+    switch (type) {
+      case 'chain': return Server;
+      case 'storage': return HardDrive;
+      case 'compute': return Cpu;
+      case 'da': return Database;
+      case 'alignment': return Users;
+    }
+  };
 
   const getTypeColor = (type: Transaction['type']) => {
     switch (type) {
-      case 'validator': return 'text-purple-400';
+      case 'chain': return 'text-purple-400';
       case 'storage': return 'text-blue-400';
-      case 'compute': return 'text-green-400';
-      case 'da': return 'text-yellow-400';
+      case 'compute': return 'text-orange-400';
+      case 'da': return 'text-green-400';
       case 'alignment': return 'text-pink-400';
     }
   };
 
   const getTypeLabel = (type: Transaction['type']) => {
     switch (type) {
-      case 'validator': return 'Validator';
-      case 'storage': return 'Storage';
-      case 'compute': return 'Compute';
-      case 'da': return 'Data Availability';
-      case 'alignment': return 'Alignment';
+      case 'chain': return '0G Chain';
+      case 'storage': return '0G Storage';
+      case 'compute': return '0G Compute';
+      case 'da': return '0G DA';
+      case 'alignment': return '0G Alignment';
     }
   };
 
@@ -121,10 +131,13 @@ export function CarbonOffsetScanner() {
   return (
     <div className="dashboard-card p-4 sm:p-6 md:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-light flex items-center gap-2 sm:gap-3 text-white">
-          <Scan className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-400" />
-          Impact Scanner
-        </h3>
+        <div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-light flex items-center gap-2 sm:gap-3 text-white">
+            <Scan className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-400" />
+            Impact Scanner
+          </h3>
+          <p className="text-sm text-white/60 mt-2">Real-time transparency layer for decentralized AI carbon accounting</p>
+        </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -170,6 +183,10 @@ export function CarbonOffsetScanner() {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
+                    {(() => {
+                      const Icon = getTypeIcon(tx.type);
+                      return <Icon className={`w-4 h-4 ${getTypeColor(tx.type)}`} />;
+                    })()}
                     <span className={`text-xs font-medium ${getTypeColor(tx.type)}`}>
                       {getTypeLabel(tx.type)}
                     </span>
