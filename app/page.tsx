@@ -584,7 +584,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
-          className="py-20 mb-16"
+          className="pt-20 pb-12 mb-8"
         >
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-6 md:mb-8 leading-[1.2]">
@@ -592,10 +592,9 @@ export default function Home() {
               <span className="gradient-text block mt-2">shapes tomorrow.</span>
             </h2>
 
-            <p className="text-xl sm:text-2xl text-green-400 font-medium max-w-3xl mx-auto mb-6 px-4">
+            <p className="text-xl sm:text-2xl text-green-400 font-medium max-w-3xl mx-auto mb-8 px-4">
               Earn competitive yields while helping ØG lead carbon-neutral decentralized AI.
             </p>
-
 
             <a
               href="https://www.0impact.ai/#climate"
@@ -613,10 +612,13 @@ export default function Home() {
               />
               <span className="text-white/90 group-hover:translate-x-1 transition-transform">→</span>
             </a>
-
           </div>
         </motion.section>
 
+        {/* Divider */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
+        </div>
 
         {/* Methodology Section */}
         <motion.section
