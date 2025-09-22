@@ -70,7 +70,7 @@ export default function Home() {
 
       {/* Header */}
       <header className="relative z-10 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,21 +79,21 @@ export default function Home() {
           >
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
-                <Image 
-                  src="/0g-white-logo.png" 
-                  alt="ØG Logo" 
-                  width={80} 
-                  height={32}
-                  className="h-8 w-auto"
+                <Image
+                  src="/0g-white-logo.png"
+                  alt="ØG Logo"
+                  width={120}
+                  height={48}
+                  className="h-10 sm:h-12 md:h-14 w-auto"
                 />
-                <span className="text-xs font-normal text-white/40">(Zero Gravity)</span>
+                <span className="text-sm sm:text-base font-normal text-white/40">(Zero Gravity)</span>
               </div>
-              <div className="h-4 w-px bg-[#E5E5E5]/20"></div>
-              <div className="text-sm font-normal text-white/60">Climate Impact Monitor</div>
+              <div className="h-5 sm:h-6 w-px bg-[#E5E5E5]/20"></div>
+              <div className="text-base sm:text-lg font-normal text-white/60">Climate Dashboard</div>
             </div>
             <a
               href="#impact-engine"
-              className="text-sm font-normal text-white/60 hover:text-white transition-colors"
+              className="text-base sm:text-lg font-normal text-white/60 hover:text-white transition-colors"
             >
               Stake Now
             </a>
@@ -132,50 +132,51 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-green-500/5 via-green-500/[0.02] to-transparent border border-green-500/30 backdrop-blur-sm"
+            className="relative overflow-hidden p-4 sm:p-6 flex flex-col rounded-xl bg-gradient-to-br from-green-500/5 via-green-500/[0.02] to-transparent border border-green-500/30 backdrop-blur-sm transition-all duration-300 hover:border-green-500/50 hover:shadow-[0_4px_24px_rgba(34,197,94,0.2)] hover:scale-[1.02] cursor-pointer"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="text-lg font-light text-white flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-green-500/10 border border-green-500/20">
-                    <Leaf className="w-5 h-5 text-green-400" />
+              <div className="flex items-center justify-between mb-4 sm:mb-5">
+                <h3 className="text-base sm:text-lg font-light text-white flex items-center gap-2 sm:gap-3">
+                  <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-green-500/10 border border-green-500/20">
+                    <Leaf className="w-4 sm:w-5 h-4 sm:h-5 text-green-400" />
                   </div>
-                  Carbon Offset
+                  <span className="hidden sm:inline">Carbon Offset</span>
+                  <span className="sm:hidden">Carbon</span>
                 </h3>
-                <div className="flex items-center gap-2 bg-green-500/10 px-3 py-1.5 rounded-lg border border-green-500/20">
+                <div className="flex items-center gap-1.5 sm:gap-2 bg-green-500/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-green-500/20">
                   <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-[10px] text-green-400 font-medium tracking-wide">LIVE</span>
+                  <span className="text-[9px] sm:text-[10px] text-green-400 font-medium tracking-wide">LIVE</span>
                 </div>
               </div>
 
               <div className="flex-1 flex flex-col justify-between">
-                <div className="mb-5 text-center">
-                  <div className="flex items-baseline gap-2 justify-center">
-                    <h4 className="text-3xl md:text-4xl font-extralight text-green-400">
+                <div className="mb-4 sm:mb-5 text-center">
+                  <div className="flex items-baseline gap-1 sm:gap-2 justify-center">
+                    <h4 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-green-400">
                       {cumulativeOffset.toFixed(3)}
                     </h4>
-                    <span className="text-sm text-green-400/70 font-light">tCO₂</span>
+                    <span className="text-xs sm:text-sm text-green-400 font-normal">tCO₂</span>
                   </div>
-                  <p className="text-[10px] text-neutral-light/60 uppercase tracking-[0.15em] font-medium mt-2">SINCE GENESIS</p>
+                  <p className="text-[9px] sm:text-[10px] text-neutral-light/60 uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium mt-1 sm:mt-2">SINCE GENESIS</p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-3 relative">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-base font-light text-white">1.28</p>
-                      <p className="text-[9px] text-neutral-light/60">tCO₂/hour</p>
+                      <p className="text-sm sm:text-base font-light text-white">1.28</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/hour</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-green-400/30" />
                     <div className="text-center">
-                      <p className="text-base font-light text-green-400">30.66</p>
-                      <p className="text-[9px] text-neutral-light/60">tCO₂/day</p>
+                      <p className="text-sm sm:text-base font-light text-green-400">30.66</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/day</p>
                     </div>
                   </div>
 
-                  <div className="bg-green-500/5 rounded-lg p-3 border border-green-500/10 min-h-[80px] flex flex-col">
-                    <div className="flex items-center justify-between text-[11px] mb-2">
-                      <span className="text-neutral-light font-medium">Daily Target Progress</span>
+                  <div className="bg-green-500/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-green-500/10 min-h-[70px] sm:min-h-[90px] flex flex-col">
+                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-2">
+                      <span className="text-neutral-light font-medium">Daily Progress</span>
                       <div
                         className="relative"
                         onMouseEnter={() => setShowProgressTooltip(true)}
@@ -219,7 +220,7 @@ export default function Home() {
                           <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10" />
                         </motion.div>
                       </div>
-                      <span className="text-green-400 font-semibold text-xs min-w-[45px]">{((todayOffset / 30.66) * 100).toFixed(1)}%</span>
+                      <span className="text-green-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / 30.66) * 100).toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -231,46 +232,47 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-purple-500/5 via-purple-500/[0.02] to-transparent border border-purple-500/30 backdrop-blur-sm"
+            className="relative overflow-hidden p-4 sm:p-6 flex flex-col rounded-xl bg-gradient-to-br from-purple-500/5 via-purple-500/[0.02] to-transparent border border-purple-500/30 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 hover:shadow-[0_4px_24px_rgba(147,51,234,0.2)] hover:scale-[1.02] cursor-pointer"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="text-lg font-light text-white flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
-                    <Activity className="w-5 h-5 text-purple-400" />
+              <div className="flex items-center justify-between mb-4 sm:mb-5">
+                <h3 className="text-base sm:text-lg font-light text-white flex items-center gap-2 sm:gap-3">
+                  <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-purple-500/10 border border-purple-500/20">
+                    <Activity className="w-4 sm:w-5 h-4 sm:h-5 text-purple-400" />
                   </div>
-                  Network Scale
+                  <span className="hidden sm:inline">Network Efficiency</span>
+                  <span className="sm:hidden">Efficiency</span>
                 </h3>
               </div>
 
               <div className="flex-1 flex flex-col justify-between">
-                <div className="mb-5 text-center">
-                  <div className="flex items-baseline gap-2 justify-center">
-                    <h4 className="text-3xl md:text-4xl font-extralight text-purple-400">
+                <div className="mb-4 sm:mb-5 text-center">
+                  <div className="flex items-baseline gap-1 sm:gap-2 justify-center">
+                    <h4 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-purple-400">
                       <LiveCounter value={metrics.totalNodes} decimals={0} increment={3} duration={10000} />
                     </h4>
-                    <span className="text-sm text-purple-400/70 font-light">nodes</span>
+                    <span className="text-xs sm:text-sm text-purple-400 font-normal">nodes</span>
                   </div>
-                  <p className="text-[10px] text-neutral-light/60 uppercase tracking-[0.15em] font-medium mt-2">ACTIVE WORLDWIDE</p>
+                  <p className="text-[9px] sm:text-[10px] text-neutral-light/60 uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium mt-1 sm:mt-2">ACTIVE WORLDWIDE</p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-3 relative">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-base font-light text-purple-400">64</p>
-                      <p className="text-[9px] text-neutral-light/60">MWh/day</p>
+                      <p className="text-sm sm:text-base font-light text-purple-400">64</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">MWh/day</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-purple-400/30" />
                     <div className="text-center">
-                      <p className="text-base font-light text-white">23.4</p>
-                      <p className="text-[9px] text-neutral-light/60">GWh/year</p>
+                      <p className="text-sm sm:text-base font-light text-white">23.4</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">GWh/year</p>
                     </div>
                   </div>
 
-                  <div className="bg-purple-500/5 rounded-lg p-3 border border-purple-500/10 min-h-[80px] flex flex-col">
-                    <div className="flex items-center justify-between text-[11px] mb-2">
-                      <span className="text-neutral-light font-medium">Network Efficiency</span>
+                  <div className="bg-purple-500/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-purple-500/10 min-h-[70px] sm:min-h-[90px] flex flex-col">
+                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-2">
+                      <span className="text-neutral-light font-medium">Efficiency</span>
                       <div
                         className="relative"
                         onMouseEnter={() => setShowEfficiencyTooltip(true)}
@@ -306,12 +308,12 @@ export default function Home() {
                         )}
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-2">
                       <div className="text-center">
-                        <p className="text-[13px] font-light text-purple-400">0.000171 <span className="text-[10px] text-neutral-light/60">tCO₂/node</span></p>
+                        <p className="text-[11px] sm:text-[13px] font-light text-purple-400">0.000171 <span className="text-[9px] sm:text-[10px] text-neutral-light/60">tCO₂/node</span></p>
                       </div>
                       <div className="text-center">
-                        <p className="text-[13px] font-light text-white">0.36 <span className="text-[10px] text-neutral-light/60">kWh/node</span></p>
+                        <p className="text-[11px] sm:text-[13px] font-light text-white">0.36 <span className="text-[9px] sm:text-[10px] text-neutral-light/60">kWh/node</span></p>
                       </div>
                     </div>
                   </div>
@@ -324,7 +326,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-emerald-500/5 via-emerald-500/[0.02] to-transparent border border-emerald-500/30 backdrop-blur-sm"
+            className="relative overflow-hidden p-4 sm:p-6 flex flex-col rounded-xl bg-gradient-to-br from-emerald-500/5 via-emerald-500/[0.02] to-transparent border border-emerald-500/30 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:shadow-[0_4px_24px_rgba(16,185,129,0.2)] hover:scale-[1.02] cursor-pointer"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
@@ -343,7 +345,7 @@ export default function Home() {
                     <h4 className="text-3xl md:text-4xl font-extralight text-emerald-400">
                       508,636
                     </h4>
-                    <span className="text-sm text-emerald-400/70 font-light">trees</span>
+                    <span className="text-sm text-emerald-400 font-normal">trees</span>
                   </div>
                   <p className="text-[10px] text-neutral-light/60 uppercase tracking-[0.15em] font-medium mt-2">WORKING YEAR-ROUND</p>
                 </div>
@@ -416,7 +418,7 @@ export default function Home() {
         <div className="px-1 mb-4">
           <h2 className="text-xs sm:text-sm text-neutral-light/70 uppercase tracking-[0.15em] font-medium">Layer Breakdown</h2>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-12 md:mb-16">
             {layerMetrics.map((layer, index) => {
               const icons = {
                 'ØG Validator': Server,
@@ -432,7 +434,9 @@ export default function Home() {
                   bg: 'bg-amber-500/10',
                   border: 'border-amber-500/20',
                   cardBg: 'bg-gradient-to-br from-amber-500/5 via-amber-500/[0.02] to-transparent',
-                  cardBorder: 'border-amber-500/30'
+                  cardBorder: 'border-amber-500/30',
+                  hoverBorder: 'hover:border-amber-500/50',
+                  hoverShadow: 'hover:shadow-[0_4px_24px_rgba(245,158,11,0.2)]'
                 },
                 'ØG Storage': {
                   icon: 'text-blue-400',
@@ -440,7 +444,9 @@ export default function Home() {
                   bg: 'bg-blue-500/10',
                   border: 'border-blue-500/20',
                   cardBg: 'bg-gradient-to-br from-blue-500/5 via-blue-500/[0.02] to-transparent',
-                  cardBorder: 'border-blue-500/30'
+                  cardBorder: 'border-blue-500/30',
+                  hoverBorder: 'hover:border-blue-500/50',
+                  hoverShadow: 'hover:shadow-[0_4px_24px_rgba(59,130,246,0.2)]'
                 },
                 'ØG DA': {
                   icon: 'text-cyan-400',
@@ -448,7 +454,9 @@ export default function Home() {
                   bg: 'bg-cyan-500/10',
                   border: 'border-cyan-500/20',
                   cardBg: 'bg-gradient-to-br from-cyan-500/5 via-cyan-500/[0.02] to-transparent',
-                  cardBorder: 'border-cyan-500/30'
+                  cardBorder: 'border-cyan-500/30',
+                  hoverBorder: 'hover:border-cyan-500/50',
+                  hoverShadow: 'hover:shadow-[0_4px_24px_rgba(6,182,212,0.2)]'
                 },
                 'ØG Compute': {
                   icon: 'text-orange-400',
@@ -456,7 +464,9 @@ export default function Home() {
                   bg: 'bg-orange-500/10',
                   border: 'border-orange-500/20',
                   cardBg: 'bg-gradient-to-br from-orange-500/5 via-orange-500/[0.02] to-transparent',
-                  cardBorder: 'border-orange-500/30'
+                  cardBorder: 'border-orange-500/30',
+                  hoverBorder: 'hover:border-orange-500/50',
+                  hoverShadow: 'hover:shadow-[0_4px_24px_rgba(249,115,22,0.2)]'
                 },
                 'ØG Alignment': {
                   icon: 'text-pink-400',
@@ -464,7 +474,9 @@ export default function Home() {
                   bg: 'bg-pink-500/10',
                   border: 'border-pink-500/20',
                   cardBg: 'bg-gradient-to-br from-pink-500/5 via-pink-500/[0.02] to-transparent',
-                  cardBorder: 'border-pink-500/30'
+                  cardBorder: 'border-pink-500/30',
+                  hoverBorder: 'hover:border-pink-500/50',
+                  hoverShadow: 'hover:shadow-[0_4px_24px_rgba(236,72,153,0.2)]'
                 },
               };
               const Icon = icons[layer.layer as keyof typeof icons] || Server;
@@ -483,29 +495,28 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
-                  className={`relative overflow-hidden hover:scale-[1.02] transition-all duration-300 p-5 rounded-xl ${color.cardBg} border ${layer.comingSoon ? 'border-white/10' : color.cardBorder} backdrop-blur-sm`}
+                  className={`relative overflow-hidden p-4 sm:p-5 rounded-xl ${color.cardBg} border ${layer.comingSoon ? 'border-white/10' : color.cardBorder} backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] cursor-pointer ${layer.comingSoon ? 'hover:border-white/20 hover:shadow-[0_4px_24px_rgba(255,255,255,0.1)]' : `${color.hoverBorder} ${color.hoverShadow}`}`}
                 >
                   <div className={`absolute top-0 right-0 w-28 h-28 md:w-36 md:h-36 bg-gradient-to-br ${color.glow} to-transparent rounded-full blur-3xl opacity-60`} />
                   <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2 mb-4">
                       <div className={`p-2 rounded-lg ${layer.comingSoon ? 'bg-neutral-darker/50 border border-white/5' : `${color.bg} border ${color.border}`}`}>
                         <Icon className={`w-4 h-4 ${layer.comingSoon ? 'text-neutral-light/30' : color.icon}`} />
                       </div>
+                      <h4 className="text-[11px] sm:text-xs font-medium text-white/90">{layer.layer}</h4>
                     </div>
 
-                    <h4 className="text-xs font-medium text-white/90 mb-2">{layer.layer}</h4>
-
                     <>
-                      <div className="mb-3">
-                        <p className={`text-2xl md:text-3xl font-extralight ${layer.comingSoon ? 'text-neutral-light/30' : 'text-white'}`}>
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <p className={`text-xl sm:text-2xl md:text-3xl font-extralight ${layer.comingSoon ? 'text-neutral-light/30' : 'text-white'}`}>
                           {layer.comingSoon ? '--' : layer.nodes.toLocaleString()}
                         </p>
-                        <p className="text-[9px] text-neutral-light/60 uppercase tracking-wider mt-1">
+                        <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider">
                           {layer.comingSoon ? 'Coming Soon' : layer.status === 'calibrating' ? 'Est. Nodes' : 'Nodes'}
                         </p>
                       </div>
-                      <div className="space-y-1.5 pt-3 border-t border-white/5">
-                        <div className="flex justify-between items-center text-[10px]">
+                      <div className="space-y-1.5 pt-2 sm:pt-3 border-t border-white/5">
+                        <div className="flex justify-between items-center text-[9px] sm:text-[10px]">
                           <span className="text-neutral-light/50 font-light">Power</span>
                           <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : "text-white/90"}`}>
                             {layer.comingSoon ? '--' : `${layer.power.toFixed(1)} kW`}
@@ -661,26 +672,28 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-6">
-              <Image 
-                src="/0g-white-logo.png" 
-                alt="ØG Logo" 
-                width={60} 
+            <div className="mb-4 sm:mb-6">
+              <Image
+                src="/0g-white-logo.png"
+                alt="ØG Logo"
+                width={60}
                 height={24}
-                className="h-8 w-auto"
+                className="h-6 sm:h-8 w-auto"
               />
             </div>
-            <p className="text-neutral-light text-sm mb-8">
+            <p className="text-neutral-light text-xs sm:text-sm mb-6 sm:mb-8">
               Building sustainable infrastructure for the future of AI
             </p>
-            <div className="text-neutral-light text-xs">
-              <p className="flex items-center justify-center gap-1.5">
-                © 2025 ØG Labs. All rights reserved • Built with <Heart className="w-3 h-3 text-purple-400 fill-purple-400 inline" /> by{' '}
+            <div className="text-neutral-light text-[10px] sm:text-xs">
+              <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5">
+                <span>© 2025 ØG Labs. All rights reserved</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="flex items-center gap-1">Built with <Heart className="w-3 h-3 text-purple-400 fill-purple-400" /> by{' '}
                 <a href="https://bridge.eco" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors">
                   ecoBridge
-                </a>
+                </a></span>
               </p>
             </div>
           </div>

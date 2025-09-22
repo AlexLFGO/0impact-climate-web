@@ -38,45 +38,45 @@ export function OffsetCounter() {
   const treesEquivalentAnnual = Math.round((annualCredits * 1000) / 22);
 
   return (
-    <div className="dashboard-card p-6 relative overflow-hidden">
+    <div className="dashboard-card p-4 sm:p-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-full blur-3xl" />
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Leaf className="w-5 h-5 text-green-400" />
-            <h3 className="text-lg font-light text-white">Carbon-Neutral Since Genesis</h3>
+            <h3 className="text-base sm:text-lg font-light text-white">Carbon-Neutral Since Genesis</h3>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div className="space-y-1">
-            <p className="text-xs text-neutral-light/70 uppercase tracking-wider">Carbon Removed</p>
-            <p className="text-3xl font-light text-green-400 font-mono">
+            <p className="text-[10px] sm:text-xs text-neutral-light/70 uppercase tracking-wider">Carbon Removed</p>
+            <p className="text-2xl sm:text-3xl font-light text-green-400 font-mono">
               {offsetAmount.toFixed(3)}
             </p>
-            <p className="text-xs text-neutral-light">tCO₂ offset</p>
+            <p className="text-[10px] sm:text-xs text-neutral-light">tCO₂ offset</p>
           </div>
 
           <div className="space-y-1">
-            <p className="text-xs text-neutral-light/70 uppercase tracking-wider">Offset Rate</p>
-            <p className="text-2xl font-light text-white">
+            <p className="text-[10px] sm:text-xs text-neutral-light/70 uppercase tracking-wider">Offset Rate</p>
+            <p className="text-xl sm:text-2xl font-light text-white">
               {(creditsPerSecond * 3600).toFixed(3)}
             </p>
-            <p className="text-xs text-neutral-light">tCO₂/hour</p>
+            <p className="text-[10px] sm:text-xs text-neutral-light">tCO₂/hour</p>
           </div>
 
           <div className="space-y-1">
-            <p className="text-xs text-neutral-light/70 uppercase tracking-wider">Daily Impact</p>
-            <p className="text-2xl font-light text-white">
+            <p className="text-[10px] sm:text-xs text-neutral-light/70 uppercase tracking-wider">Daily Impact</p>
+            <p className="text-xl sm:text-2xl font-light text-white">
               {dailyCredits.toFixed(2)}
             </p>
-            <p className="text-xs text-neutral-light">tCO₂/day</p>
+            <p className="text-[10px] sm:text-xs text-neutral-light">tCO₂/day</p>
           </div>
 
           <div className="space-y-1 relative">
             <div className="flex items-center gap-1">
-              <p className="text-xs text-neutral-light/70 uppercase tracking-wider">Annual Impact</p>
+              <p className="text-[10px] sm:text-xs text-neutral-light/70 uppercase tracking-wider">Annual Impact</p>
               <div
                 className="relative"
                 onMouseEnter={() => setShowTooltip(true)}
@@ -87,7 +87,7 @@ export function OffsetCounter() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker/95 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl"
+                    className="absolute bottom-full right-0 mb-2 w-48 sm:w-64 p-2 sm:p-3 bg-neutral-darker/95 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl"
                     style={{ zIndex: 9999 }}
                   >
                     <div className="text-[10px] space-y-1.5">
@@ -112,10 +112,10 @@ export function OffsetCounter() {
                 )}
               </div>
             </div>
-            <p className="text-2xl font-light text-green-400">
+            <p className="text-xl sm:text-2xl font-light text-green-400">
               {treesEquivalentAnnual.toLocaleString()}
             </p>
-            <p className="text-xs text-neutral-light">trees worth of CO₂</p>
+            <p className="text-[10px] sm:text-xs text-neutral-light">trees worth of CO₂</p>
           </div>
         </div>
 
@@ -134,8 +134,8 @@ export function OffsetCounter() {
           </div>
         </div>
 
-        <div className="mt-3 text-[10px] text-neutral-light/60">
-          <p className="text-[9px]">Verified carbon removal tracked on-chain. 1 credit = 1 tCO₂ permanently removed.</p>
+        <div className="mt-3 text-[9px] sm:text-[10px] text-neutral-light/60">
+          <p className="text-[8px] sm:text-[9px]">Verified carbon removal tracked on-chain. 1 credit = 1 tCO₂ permanently removed.</p>
         </div>
       </div>
     </div>

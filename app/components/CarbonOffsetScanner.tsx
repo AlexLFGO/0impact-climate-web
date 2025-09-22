@@ -130,13 +130,13 @@ export function CarbonOffsetScanner() {
 
   return (
     <div className="dashboard-card p-4 sm:p-6 md:p-8">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3 sm:gap-0">
         <div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-light flex items-center gap-2 sm:gap-3 text-white">
             <Scan className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-400" />
             Impact Scanner
           </h3>
-          <p className="text-sm text-white/60 mt-2">Real-time transparency layer for decentralized AI carbon accounting</p>
+          <p className="text-xs sm:text-sm text-white/60 mt-1 sm:mt-2">Real-time transparency layer for decentralized AI carbon accounting</p>
         </div>
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-green-500/20 text-green-400 text-xs sm:text-sm">
           <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
@@ -169,22 +169,22 @@ export function CarbonOffsetScanner() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="p-4 rounded-lg border border-purple-500/20 bg-neutral-darker/50 hover:border-purple-500/40 hover:bg-neutral-darker/70 transition-all cursor-pointer group"
+              className="p-3 sm:p-4 rounded-lg border border-purple-500/20 bg-neutral-darker/50 hover:border-purple-500/40 hover:bg-neutral-darker/70 transition-all cursor-pointer group"
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2 mb-1 flex-wrap">
                     {(() => {
                       const Icon = getTypeIcon(tx.type);
                       return <Icon className={`w-4 h-4 ${getTypeColor(tx.type)}`} />;
                     })()}
-                    <span className={`text-xs font-medium ${getTypeColor(tx.type)}`}>
+                    <span className={`text-[11px] sm:text-xs font-medium ${getTypeColor(tx.type)}`}>
                       {getTypeLabel(tx.type)}
                     </span>
-                    <span className="text-xs text-neutral-light">
-                      Block #{tx.blockHeight.toLocaleString()}
+                    <span className="text-[11px] sm:text-xs text-neutral-light">
+                      #{tx.blockHeight.toLocaleString()}
                     </span>
-                    <span className="text-xs text-neutral-light">
+                    <span className="text-[11px] sm:text-xs text-neutral-light">
                       {formatTime(tx.timestamp)}
                     </span>
                   </div>
@@ -192,31 +192,33 @@ export function CarbonOffsetScanner() {
                     href={`https://explorer.0g.ai/tx/${tx.hash}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-mono text-purple-400 hover:text-purple-300 truncate block transition-colors break-all sm:break-normal"
+                    className="text-[11px] sm:text-xs font-mono text-purple-400 hover:text-purple-300 truncate block transition-colors break-all"
                   >
                     {tx.hash}
                   </a>
-                  <p className="text-xs text-neutral-light mt-1">
-                    Validator: <span className="font-mono">{tx.validator}</span>
+                  <p className="text-[11px] sm:text-xs text-neutral-light mt-1">
+                    Val: <span className="font-mono">{tx.validator}</span>
                   </p>
                 </div>
                 
-                <div className="text-right shrink-0">
-                  <div className="flex items-center gap-2 justify-end mb-1">
+                <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-3 sm:gap-0 shrink-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2 sm:justify-end sm:mb-1">
                     <Leaf className="w-3 h-3 text-green-400" />
-                    <p className="text-sm font-light text-green-400">
-                      {tx.co2Offset.toFixed(2)} kg CO₂
+                    <p className="text-[13px] sm:text-sm font-light text-green-400">
+                      {tx.co2Offset.toFixed(2)} kg
                     </p>
                   </div>
-                  <p className="text-xs text-neutral-light">
-                    Gas: {tx.gasUsed.toLocaleString()}
-                  </p>
-                  {tx.status === 'confirmed' && (
-                    <div className="flex items-center gap-1 justify-end mt-1">
-                      <CheckCircle className="w-3 h-3 text-blue-400" />
-                      <span className="text-xs text-blue-400">0impact.ai</span>
-                    </div>
-                  )}
+                  <div className="text-right">
+                    <p className="text-[11px] sm:text-xs text-neutral-light">
+                      Gas: {(tx.gasUsed/1000).toFixed(1)}k
+                    </p>
+                    {tx.status === 'confirmed' && (
+                      <div className="flex items-center gap-1 justify-end mt-1">
+                        <CheckCircle className="w-3 h-3 text-blue-400" />
+                        <span className="text-[10px] sm:text-xs text-blue-400">0impact</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -226,19 +228,19 @@ export function CarbonOffsetScanner() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-4 border-t border-purple-500/20">
-          <p className="text-xs text-neutral-light text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mt-6 pt-4 border-t border-purple-500/20">
+          <p className="text-[11px] sm:text-xs text-neutral-light text-center sm:text-left">
             Showing {startIndex + 1}-{Math.min(startIndex + transactionsPerPage, filteredTransactions.length)} of {filteredTransactions.length}
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
+              className="p-1.5 sm:p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
             </motion.button>
             <div className="flex items-center gap-1">
               {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
@@ -259,7 +261,7 @@ export function CarbonOffsetScanner() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setCurrentPage(pageNum)}
-                    className={`w-8 h-8 rounded-lg text-sm transition-all ${
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs sm:text-sm transition-all ${
                       currentPage === pageNum
                         ? 'bg-purple-500/30 text-white border border-purple-500/50'
                         : 'bg-neutral-darker border border-purple-500/20 text-neutral-light hover:border-purple-500/40'
@@ -275,9 +277,9 @@ export function CarbonOffsetScanner() {
               whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
+              className="p-1.5 sm:p-2 rounded-lg bg-neutral-darker border border-purple-500/20 text-purple-400 disabled:opacity-50 disabled:cursor-not-allowed hover:border-purple-500/40 transition-all"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </motion.button>
           </div>
         </div>
