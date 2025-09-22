@@ -132,9 +132,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="dashboard-card relative overflow-hidden p-6 flex flex-col"
+            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-green-500/5 via-green-500/[0.02] to-transparent border border-green-500/30 backdrop-blur-sm"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-light text-white flex items-center gap-3">
@@ -186,7 +186,7 @@ export default function Home() {
                           <motion.div
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker/98 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl"
+                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker border border-green-500/20 rounded-lg shadow-xl"
                             style={{ zIndex: 9999 }}
                           >
                             <div className="text-[10px] space-y-1.5">
@@ -231,9 +231,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="dashboard-card relative overflow-hidden p-6 flex flex-col"
+            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-purple-500/5 via-purple-500/[0.02] to-transparent border border-purple-500/30 backdrop-blur-sm"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-light text-white flex items-center gap-3">
@@ -281,7 +281,7 @@ export default function Home() {
                           <motion.div
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker/98 backdrop-blur-sm border border-purple-500/20 rounded-lg shadow-xl"
+                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker border border-purple-500/20 rounded-lg shadow-xl"
                             style={{ zIndex: 9999 }}
                           >
                             <div className="text-[10px] space-y-1.5">
@@ -324,9 +324,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="dashboard-card relative overflow-hidden p-6 flex flex-col"
+            className="relative overflow-hidden p-6 flex flex-col rounded-xl bg-gradient-to-br from-emerald-500/5 via-emerald-500/[0.02] to-transparent border border-emerald-500/30 backdrop-blur-sm"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl" />
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-light text-white flex items-center gap-3">
@@ -354,9 +354,9 @@ export default function Home() {
                       <p className="text-base font-light text-white">11,190</p>
                       <p className="text-[9px] text-neutral-light/60">tCO₂/year</p>
                     </div>
-                    <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-green-400/30" />
+                    <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-emerald-400/30" />
                     <div className="text-center">
-                      <p className="text-base font-light text-green-400">100%</p>
+                      <p className="text-lg font-extralight text-emerald-400">100%</p>
                       <p className="text-[9px] text-neutral-light/60">carbon neutral</p>
                     </div>
                   </div>
@@ -374,7 +374,7 @@ export default function Home() {
                           <motion.div
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker/98 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl"
+                            className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-neutral-darker border border-green-500/20 rounded-lg shadow-xl"
                             style={{ zIndex: 9999 }}
                           >
                             <div className="text-[10px] space-y-1.5">
@@ -401,7 +401,7 @@ export default function Home() {
                     </div>
                     <div className="mt-2">
                       <p className="text-xs text-neutral-light">
-                        <span className="text-green-400 font-medium">1,000 acres</span> of mature forest absorbing CO₂
+                        <span className="text-emerald-400 font-medium">1,000 acres</span> of mature forest absorbing CO₂
                       </p>
                     </div>
                   </div>
@@ -413,8 +413,8 @@ export default function Home() {
 
 
         {/* ØG Architecture */}
-        <div className="px-1 mb-3">
-          <h2 className="text-xs sm:text-sm text-neutral-light uppercase tracking-wider">Layer Breakdown</h2>
+        <div className="px-1 mb-4">
+          <h2 className="text-xs sm:text-sm text-neutral-light/70 uppercase tracking-[0.15em] font-medium">Layer Breakdown</h2>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-12 md:mb-16">
             {layerMetrics.map((layer, index) => {
@@ -426,14 +426,56 @@ export default function Home() {
                 'ØG Alignment': Users,
               };
               const colors = {
-                'ØG Validator': { icon: 'text-purple-400', glow: 'from-purple-500/10' },
-                'ØG Storage': { icon: 'text-blue-400', glow: 'from-blue-500/10' },
-                'ØG DA': { icon: 'text-green-400', glow: 'from-green-500/10' },
-                'ØG Compute': { icon: 'text-orange-400', glow: 'from-orange-500/10' },
-                'ØG Alignment': { icon: 'text-pink-400', glow: 'from-pink-500/10' },
+                'ØG Validator': {
+                  icon: 'text-amber-400',
+                  glow: 'from-amber-500/20',
+                  bg: 'bg-amber-500/10',
+                  border: 'border-amber-500/20',
+                  cardBg: 'bg-gradient-to-br from-amber-500/5 via-amber-500/[0.02] to-transparent',
+                  cardBorder: 'border-amber-500/30'
+                },
+                'ØG Storage': {
+                  icon: 'text-blue-400',
+                  glow: 'from-blue-500/20',
+                  bg: 'bg-blue-500/10',
+                  border: 'border-blue-500/20',
+                  cardBg: 'bg-gradient-to-br from-blue-500/5 via-blue-500/[0.02] to-transparent',
+                  cardBorder: 'border-blue-500/30'
+                },
+                'ØG DA': {
+                  icon: 'text-cyan-400',
+                  glow: 'from-cyan-500/20',
+                  bg: 'bg-cyan-500/10',
+                  border: 'border-cyan-500/20',
+                  cardBg: 'bg-gradient-to-br from-cyan-500/5 via-cyan-500/[0.02] to-transparent',
+                  cardBorder: 'border-cyan-500/30'
+                },
+                'ØG Compute': {
+                  icon: 'text-orange-400',
+                  glow: 'from-orange-500/20',
+                  bg: 'bg-orange-500/10',
+                  border: 'border-orange-500/20',
+                  cardBg: 'bg-gradient-to-br from-orange-500/5 via-orange-500/[0.02] to-transparent',
+                  cardBorder: 'border-orange-500/30'
+                },
+                'ØG Alignment': {
+                  icon: 'text-pink-400',
+                  glow: 'from-pink-500/20',
+                  bg: 'bg-pink-500/10',
+                  border: 'border-pink-500/20',
+                  cardBg: 'bg-gradient-to-br from-pink-500/5 via-pink-500/[0.02] to-transparent',
+                  cardBorder: 'border-pink-500/30'
+                },
               };
               const Icon = icons[layer.layer as keyof typeof icons] || Server;
-              const color = colors[layer.layer as keyof typeof colors] || { icon: 'text-purple-400', glow: 'from-purple-500/10' };
+              const color = colors[layer.layer as keyof typeof colors] || {
+                icon: 'text-purple-400',
+                glow: 'from-purple-500/20',
+                bg: 'bg-purple-500/10',
+                border: 'border-purple-500/20',
+                cardBg: 'bg-gradient-to-br from-purple-500/5 via-purple-500/[0.02] to-transparent',
+                cardBorder: 'border-purple-500/30'
+              };
 
               return (
                 <motion.div
@@ -441,40 +483,43 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
-                  className="dashboard-card relative overflow-hidden hover:scale-[1.02] transition-all duration-300 p-4 md:p-5"
+                  className={`relative overflow-hidden hover:scale-[1.02] transition-all duration-300 p-5 rounded-xl ${color.cardBg} border ${layer.comingSoon ? 'border-white/10' : color.cardBorder} backdrop-blur-sm`}
                 >
-                  <div className={`absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br ${color.glow} to-transparent rounded-full blur-2xl`} />
+                  <div className={`absolute top-0 right-0 w-28 h-28 md:w-36 md:h-36 bg-gradient-to-br ${color.glow} to-transparent rounded-full blur-3xl opacity-60`} />
                   <div className="relative z-10">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Icon className={`w-4 h-4 ${layer.comingSoon ? 'text-neutral-light/50' : color.icon}`} />
-                      <h4 className="text-sm font-light text-white flex-1">{layer.layer}</h4>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`p-2 rounded-lg ${layer.comingSoon ? 'bg-neutral-darker/50 border border-white/5' : `${color.bg} border ${color.border}`}`}>
+                        <Icon className={`w-4 h-4 ${layer.comingSoon ? 'text-neutral-light/30' : color.icon}`} />
+                      </div>
                     </div>
+
+                    <h4 className="text-xs font-medium text-white/90 mb-2">{layer.layer}</h4>
 
                     <>
                       <div className="mb-3">
-                        <p className="text-2xl md:text-3xl font-light text-white">
+                        <p className={`text-2xl md:text-3xl font-extralight ${layer.comingSoon ? 'text-neutral-light/30' : 'text-white'}`}>
                           {layer.comingSoon ? '--' : layer.nodes.toLocaleString()}
                         </p>
-                        <p className="text-[10px] text-neutral-light uppercase tracking-wide">
-                          {layer.comingSoon ? 'Coming Soon' : layer.status === 'calibrating' ? 'Estimated Nodes' : 'Active Nodes'}
+                        <p className="text-[9px] text-neutral-light/60 uppercase tracking-wider mt-1">
+                          {layer.comingSoon ? 'Coming Soon' : layer.status === 'calibrating' ? 'Est. Nodes' : 'Nodes'}
                         </p>
                       </div>
-                      <div className="space-y-1.5 pt-2 border-t border-white/5">
-                        <div className="flex justify-between items-center text-[11px]">
-                          <span className="text-neutral-light/60">Power</span>
-                          <span className={layer.comingSoon ? "text-neutral-light/30" : "text-white"}>
+                      <div className="space-y-1.5 pt-3 border-t border-white/5">
+                        <div className="flex justify-between items-center text-[10px]">
+                          <span className="text-neutral-light/50 font-light">Power</span>
+                          <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : "text-white/90"}`}>
                             {layer.comingSoon ? '--' : `${layer.power.toFixed(1)} kW`}
                           </span>
                         </div>
-                        <div className="flex justify-between items-center text-[11px]">
-                          <span className="text-neutral-light/60">Daily</span>
-                          <span className={layer.comingSoon ? "text-neutral-light/30" : "text-blue-400"}>
+                        <div className="flex justify-between items-center text-[10px]">
+                          <span className="text-neutral-light/50 font-light">Daily</span>
+                          <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : color.icon}`}>
                             {layer.comingSoon ? '--' : `${((layer.dailyEnergy || 0) / 1000).toFixed(1)} MWh`}
                           </span>
                         </div>
-                        <div className="flex justify-between items-center text-[11px]">
-                          <span className="text-neutral-light/60">Annual</span>
-                          <span className={layer.comingSoon ? "text-neutral-light/30" : "text-purple-400"}>
+                        <div className="flex justify-between items-center text-[10px]">
+                          <span className="text-neutral-light/50 font-light">Annual</span>
+                          <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : color.icon}`}>
                             {layer.comingSoon ? '--' :
                               (layer.annualEnergy && layer.annualEnergy >= 1000
                                 ? `${(layer.annualEnergy / 1000).toFixed(1)} GWh`
@@ -482,15 +527,15 @@ export default function Home() {
                             }
                           </span>
                         </div>
-                        <div className="flex justify-between items-center text-[11px] pt-1.5 border-t border-white/5">
-                          <span className="text-neutral-light/60">CO₂/day</span>
-                          <span className={layer.comingSoon ? "text-neutral-light/30" : "text-orange-400"}>
+                        <div className="flex justify-between items-center text-[10px] pt-2 mt-2 border-t border-white/5">
+                          <span className="text-neutral-light/50 font-light">CO₂/day</span>
+                          <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : "text-orange-300"}`}>
                             {layer.comingSoon ? '--' : `${(layer.emissions / 1000).toFixed(2)} t`}
                           </span>
                         </div>
-                        <div className="flex justify-between items-center text-[11px]">
-                          <span className="text-neutral-light/60">CO₂/year</span>
-                          <span className={layer.comingSoon ? "text-neutral-light/30" : "text-red-400"}>
+                        <div className="flex justify-between items-center text-[10px]">
+                          <span className="text-neutral-light/50 font-light">CO₂/year</span>
+                          <span className={`font-medium ${layer.comingSoon ? "text-neutral-light/30" : "text-red-300"}`}>
                             {layer.comingSoon ? '--' : `${layer.annualEmissions?.toFixed(0) || 0} t`}
                           </span>
                         </div>
