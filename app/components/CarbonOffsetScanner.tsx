@@ -138,19 +138,10 @@ export function CarbonOffsetScanner() {
           </h3>
           <p className="text-sm text-white/60 mt-2">Real-time transparency layer for decentralized AI carbon accounting</p>
         </div>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsLive(!isLive)}
-          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all text-xs sm:text-sm ${
-            isLive 
-              ? 'bg-green-500/20 text-green-400' 
-              : 'bg-neutral-dark text-neutral-light'
-          }`}
-        >
-          <div className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-neutral-light'}`} />
-          {isLive ? 'Live' : 'Paused'}
-        </motion.button>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-green-500/20 text-green-400 text-xs sm:text-sm">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <span>ØG-Mainnet-Aristotle</span>
+        </div>
       </div>
 
       {/* Search Bar */}

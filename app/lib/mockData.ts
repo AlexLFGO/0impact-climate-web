@@ -49,36 +49,29 @@ function calculateEmissions(nodeCount: number, powerPerNode: number, carbonInten
 
 // Generate projected metrics based on strategy.md estimations
 export function generateNetworkMetrics(): NetworkMetrics {
-  // Based on strategy.md:
-  // Validators: 63 on current testnet (8000+ possible on mainnet)
-  // Storage: 928 active miners from StorageScan
-  // DA: ~150 estimated
-  // Compute: ~50 GPUs estimated
-  // Alignment: 1000 estimated active (from 175,500 sold)
-  
-  const validators = 63;
-  const storageNodes = 928; // Active miners from StorageScan
-  const daNodes = 150; // Estimated
-  const computeNodes = 50; // Estimated GPUs
-  const alignmentNodes = 1000; // Estimated active
-  
+  // Based on actual network data from CSV
+  const validators = 121;
+  const storageNodes = 3500;
+  const daNodes = 350; // DA Verifiers (100) + Retrievers (250)
+  const computeNodes = 0; // No node count in CSV for compute
+  const alignmentNodes = 175500;
+
   const totalNodes = validators + storageNodes + daNodes + computeNodes + alignmentNodes;
-  
-  // Calculate power (in kW) based on strategy.md assumptions
-  const validatorPower = validators * 0.2; // 200W per validator
-  const storagePower = storageNodes * 0.15; // 150W per storage node (PoRA mining)
-  const daPower = daNodes * 0.12; // 120W per DA node
-  const computePower = computeNodes * 0.15; // 150W average per GPU (30% utilization)
-  const alignmentPower = alignmentNodes * 0.1; // 100W per alignment node
-  
+
+  // Power consumption from CSV (Daily kWh converted to kW)
+  const validatorPower = 781.18 / 24; // ~32.5 kW
+  const storagePower = 12600 / 24; // 525 kW
+  const daPower = 240 / 24; // 10 kW (combined verifiers and retrievers)
+  const computePower = 29315.07 / 24; // ~1221.5 kW
+  const alignmentPower = 21060 / 24; // 877.5 kW
+
   const totalPower = validatorPower + storagePower + daPower + computePower + alignmentPower;
-  
-  // Calculate daily emissions (kg CO2) using 0.5 kg/kWh global average
-  const carbonIntensity = 0.5; // kg CO2 per kWh
-  const dailyEmissionsKg = totalPower * 24 * carbonIntensity;
-  
-  // Calculate annual energy (MWh/year)
-  const totalEnergy = totalPower * 8760 / 1000;
+
+  // Daily emissions from CSV (in tCO2, convert to kg)
+  const dailyEmissionsKg = 30.658 * 1000; // Convert tCO2 to kg (30.658 from CSV TOTAL)
+
+  // Annual energy from CSV (MWh/year)
+  const totalEnergy = 23358.629; // 23,358.629 MWh/year from CSV TOTAL
   
   // Decentralization score (percentage of community nodes)
   const decentralizationScore = (alignmentNodes / totalNodes) * 100;
@@ -96,50 +89,76 @@ export function generateNetworkMetrics(): NetworkMetrics {
   };
 }
 
-// Generate metrics for each layer based on strategy.md
+// Generate metrics for each layer based on actual CSV data
 export function generateLayerMetrics(): LayerMetrics[] {
-  const carbonIntensity = 0.5; // kg CO2/kWh global average
-  
+  // Trees saved calculation: 1 tree absorbs ~22kg CO2/year
+  // We show trees that would be needed to offset daily emissions
+  const treesPerKgCO2Daily = 1 / (22 / 365); // ~0.0164 trees per kg CO2 per day
+
   return [
     {
-      layer: 'ØG Chain',
-      nodes: 63,
-      power: 12.6, // 63 * 0.2 kW
-      emissions: Math.round(12.6 * 24 * carbonIntensity), // Daily kg CO2
-      efficiency: 75 + Math.random() * 10, // vs hyperscaler data centers
-      utilization: 50 + Math.random() * 20 // Moderate utilization per strategy.md
+      layer: 'ØG Alignment',
+      nodes: 175500,
+      power: 877.5, // kW hourly
+      emissions: 9667, // kg CO2/day
+      dailyEnergy: 21060, // kWh/day
+      annualEnergy: 7686.9, // MWh/year
+      annualEmissions: 3528.3, // tons CO2/year
+      efficiency: 0, // deprecated
+      utilization: 77,
+      treesSaved: Math.round(9667 * treesPerKgCO2Daily),
+      status: 'live'
+    },
+    {
+      layer: 'ØG Validator',
+      nodes: 121,
+      power: 32.5, // kW hourly
+      emissions: 354, // kg CO2/day
+      dailyEnergy: 781.2, // kWh/day
+      annualEnergy: 285.1, // MWh/year
+      annualEmissions: 129.1, // tons CO2/year
+      efficiency: 0, // deprecated
+      utilization: 60,
+      treesSaved: Math.round(354 * treesPerKgCO2Daily),
+      status: 'live'
     },
     {
       layer: 'ØG Storage',
-      nodes: 928,
-      power: 139.2, // 928 * 0.15 kW
-      emissions: Math.round(139.2 * 24 * carbonIntensity), // ~1,670 kg CO2/day
-      efficiency: 80 + Math.random() * 10, // distributed storage vs S3/Azure
-      utilization: 70 + Math.random() * 10 // 70% CPU load for PoRA
+      nodes: 3500,
+      power: 525, // kW hourly
+      emissions: 5040, // kg CO2/day
+      dailyEnergy: 12600, // kWh/day
+      annualEnergy: 4599, // MWh/year
+      annualEmissions: 1839.6, // tons CO2/year
+      efficiency: 0, // deprecated
+      utilization: 80,
+      treesSaved: Math.round(5040 * treesPerKgCO2Daily),
+      status: 'calibrating'
     },
     {
       layer: 'ØG DA',
-      nodes: 150,
-      power: 18.0, // 150 * 0.12 kW
-      emissions: Math.round(18.0 * 24 * carbonIntensity), // ~216 kg CO2/day
-      efficiency: 70 + Math.random() * 10, // vs centralized DA solutions
-      utilization: 30 + Math.random() * 20 // 30-50% utilization
+      nodes: 350, // Combined DA Verifiers (100) + Retrievers (250)
+      power: 10, // kW hourly (5 + 5)
+      emissions: 96, // kg CO2/day (0.048 + 0.048 tCO2)
+      dailyEnergy: 240, // kWh/day (120 + 120)
+      annualEnergy: 87.6, // MWh/year (43.8 + 43.8)
+      annualEmissions: 35.04, // tons CO2/year (17.52 + 17.52)
+      efficiency: 0, // deprecated
+      utilization: 67,
+      treesSaved: Math.round(96 * treesPerKgCO2Daily),
+      status: 'calibrating'
     },
     {
       layer: 'ØG Compute',
-      nodes: 50,
-      power: 7.5, // 50 * 0.15 kW (30% GPU utilization)
-      emissions: Math.round(7.5 * 24 * carbonIntensity), // ~90 kg CO2/day
-      efficiency: 65 + Math.random() * 15, // vs cloud GPU instances
-      utilization: 30 + Math.random() * 10 // 30% average GPU utilization
-    },
-    {
-      layer: 'Alignment Network',
-      nodes: 1000,
-      power: 100.0, // 1000 * 0.1 kW
-      emissions: Math.round(100.0 * 24 * carbonIntensity), // ~1,200 kg CO2/day
-      efficiency: 85 + Math.random() * 10, // community devices vs dedicated servers
-      utilization: 20 + Math.random() * 10 // 20% utilization for monitoring
+      nodes: 0, // No node count provided in CSV
+      power: 1221.5, // kW hourly
+      emissions: 15501, // kg CO2/day
+      dailyEnergy: 29315.1, // kWh/day
+      annualEnergy: 10700, // MWh/year
+      annualEmissions: 5658, // tons CO2/year
+      efficiency: 0, // deprecated
+      utilization: 0,
+      comingSoon: true
     }
   ];
 }
@@ -176,11 +195,11 @@ export function generateHistoricalData(days: number = 30) {
 
 // Generate node distribution data for the map
 export function generateNodeDistribution() {
-  const validators = distributeNodes(63, CITY_LOCATIONS);
-  const storage = distributeNodes(120, CITY_LOCATIONS);
-  const da = distributeNodes(45, CITY_LOCATIONS);
-  const compute = distributeNodes(30, CITY_LOCATIONS);
-  const alignment = distributeNodes(12000, CITY_LOCATIONS);
+  const validators = distributeNodes(121, CITY_LOCATIONS);
+  const storage = distributeNodes(3500, CITY_LOCATIONS);
+  const da = distributeNodes(350, CITY_LOCATIONS);
+  const compute = distributeNodes(0, CITY_LOCATIONS);
+  const alignment = distributeNodes(175500, CITY_LOCATIONS);
   
   return CITY_LOCATIONS.map(location => {
     const validatorCount = validators.get(location.id) || 0;

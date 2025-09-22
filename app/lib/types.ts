@@ -33,10 +33,16 @@ export interface NetworkMetrics {
 export interface LayerMetrics {
   layer: string;
   nodes: number;
-  power: number; // kW
-  emissions: number; // tons CO₂/year
-  efficiency: number; // performance per watt
+  power: number; // kW (hourly)
+  emissions: number; // kg CO₂/day (daily)
+  efficiency: number; // deprecated - use treesSaved instead
   utilization: number; // percentage
+  comingSoon?: boolean; // optional flag for future layers
+  treesSaved?: number; // number of trees equivalent to offset daily emissions
+  status?: 'live' | 'calibrating'; // optional status indicator
+  annualEnergy?: number; // MWh/year
+  annualEmissions?: number; // tons CO₂/year
+  dailyEnergy?: number; // kWh/day
 }
 
 export interface CommunityNode {
