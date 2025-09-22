@@ -138,30 +138,47 @@ export function CarbonOffsetScanner() {
           </h3>
           <p className="text-xs sm:text-sm text-white/60 mt-1 sm:mt-2">Real-time transparency layer for decentralized AI carbon accounting</p>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-green-500/20 text-green-400 text-xs sm:text-sm">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span>ØG-Mainnet-Aristotle</span>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-400 text-xs sm:text-sm">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <span>Mainnet Launch Soon</span>
         </div>
       </div>
 
-      {/* Search Bar */}
-      <div className="mb-6">
-        <div className="relative group w-full">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-light group-focus-within:text-purple-400 transition-colors" />
-          <input
-            type="text"
-            placeholder="Search transactions..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-neutral-darker border border-purple-500/20 rounded-lg text-white placeholder-neutral-light focus:outline-none focus:border-purple-500/50 focus:bg-neutral-darker/70 transition-all text-base"
-          />
-        </div>
-      </div>
+      {/* Coming Soon Preview */}
+      <div className="relative">
+        {/* Blur overlay for "coming soon" effect */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 rounded-lg flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full mb-4">
+              <Clock className="w-4 h-4 text-purple-400 animate-pulse" />
+              <span className="text-sm text-purple-400 font-medium">Coming Soon</span>
+            </div>
 
-      {/* Transaction List */}
-      <div className="space-y-3">
-        <AnimatePresence mode="popLayout">
-          {paginatedTransactions.map((tx) => (
+            <h4 className="text-2xl sm:text-3xl font-light text-white">
+              Live on-chain tracking
+            </h4>
+          </motion.div>
+        </div>
+
+        {/* Blurred placeholder content */}
+        <div className="filter blur-[2px] opacity-30 pointer-events-none select-none">
+          {/* Search Bar */}
+          <div className="mb-6">
+            <div className="relative group w-full">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-light" />
+              <div className="w-full pl-12 pr-4 py-3 bg-neutral-darker border border-purple-500/20 rounded-lg h-12" />
+            </div>
+          </div>
+
+          {/* Transaction List Preview */}
+          <div className="space-y-3">
+            <AnimatePresence mode="popLayout">
+              {paginatedTransactions.slice(0, 3).map((tx) => (
             <motion.div
               key={tx.id}
               layout
@@ -222,11 +239,14 @@ export function CarbonOffsetScanner() {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )).slice(0, 3)}
         </AnimatePresence>
       </div>
 
-      {/* Pagination */}
+        </div>
+      </div>
+
+      {/* Pagination - hidden for coming soon
       {totalPages > 1 && (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mt-6 pt-4 border-t border-purple-500/20">
           <p className="text-[11px] sm:text-xs text-neutral-light text-center sm:text-left">
@@ -284,6 +304,7 @@ export function CarbonOffsetScanner() {
           </div>
         </div>
       )}
+      */}
 
     </div>
   );
