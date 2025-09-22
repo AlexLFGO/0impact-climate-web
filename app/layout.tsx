@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ØG Climate Impact Monitor | Building AI That Puts Our Planet First",
+  title: "0G Climate Dashboard",
   description: "Join the sustainable AI revolution. ØG DeAIOS testnet proves decentralized AI can be 85% cleaner than traditional cloud infrastructure. Be part of the solution.",
   keywords: ["ØG", "Zero Gravity", "DeAIOS", "carbon emissions", "sustainable AI", "climate impact", "decentralized AI", "blockchain sustainability"],
   authors: [{ name: "ØG Labs" }],
