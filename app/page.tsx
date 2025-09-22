@@ -605,7 +605,7 @@ export default function Home() {
             >
               <span className="text-base sm:text-lg font-medium">Start Staking with</span>
               <Image
-                src="/0impact_logo.png"
+                src="/0Impact_logo.png"
                 alt="0Impact"
                 width={100}
                 height={33}
