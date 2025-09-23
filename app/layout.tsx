@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ØG Climate Impact Monitor",
-    description: "Projected environmental impact of decentralized AI infrastructure",
+    description: "Environmental impact of decentralized AI infrastructure",
   },
   robots: {
     index: true,
