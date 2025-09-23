@@ -15,7 +15,7 @@ export function OffsetCounter() {
   useEffect(() => {
     const updateOffset = () => {
       const hoursElapsed = (Date.now() - GENESIS_TIME) / (1000 * 60 * 60);
-      const currentOffset = 1.0857 * hoursElapsed; // Use correct hourly rate
+      const currentOffset = PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR * hoursElapsed;
       setOffsetAmount(currentOffset);
     };
 
@@ -29,11 +29,9 @@ export function OffsetCounter() {
   }, []);
 
   // Calculate daily and annual projections
-  // Force use of correct value - 9,511.3264 tCO₂/year ÷ 365 ÷ 24 = 1.0857
-  const HOURLY_RATE = 1.0857;
-  const dailyCredits = HOURLY_RATE * 24;
+  const dailyCredits = PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR * 24;
   const annualCredits = dailyCredits * 365;
-  const creditsPerSecond = HOURLY_RATE / 3600;
+  const creditsPerSecond = PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR / 3600;
 
   // Calculate tree equivalents (1 mature tree absorbs ~22kg CO₂/year = 0.022 tCO₂/year)
   // Annual offset of 9,511 tCO₂ equals 432,332 mature trees working for a full year
@@ -63,9 +61,9 @@ export function OffsetCounter() {
           <div className="space-y-1">
             <p className="text-[10px] sm:text-xs text-neutral-light/70 uppercase tracking-wider">Offset Rate</p>
             <p className="text-xl sm:text-2xl font-light text-white">
-              1.086
+              {(creditsPerSecond * 3600).toFixed(3)}
             </p>
-            <p className="text-[10px] sm:text-xs text-neutral-light">tCO₂/hour (FIXED)</p>
+            <p className="text-[10px] sm:text-xs text-neutral-light">tCO₂/hour</p>
           </div>
 
           <div className="space-y-1">
