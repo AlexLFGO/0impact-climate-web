@@ -16,6 +16,7 @@ import {
   getCumulativeOffset,
   getTodayOffset
 } from './lib/productionData';
+import { PRODUCTION_CONFIG } from './config/production.config';
 import type { NetworkMetrics } from './lib/types';
 
 export default function Home() {
@@ -166,12 +167,12 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-white">1.28</p>
+                      <p className="text-sm sm:text-base font-light text-white">{PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR.toFixed(2)}</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/hour</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-blue-400">26.06</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">{(PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR * 24).toFixed(2)}</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/day</p>
                     </div>
                   </div>

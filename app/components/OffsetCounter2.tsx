@@ -8,7 +8,7 @@ import { PRODUCTION_CONFIG } from '@/app/config/production.config';
 // Fixed genesis timestamp - September 22, 2025, 09:06:42 UTC
 const GENESIS_TIME = new Date('2025-09-22T09:06:42Z').getTime();
 
-export function OffsetCounter() {
+export function OffsetCounter2() {
   const [offsetAmount, setOffsetAmount] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
 
