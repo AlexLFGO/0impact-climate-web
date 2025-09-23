@@ -1,9 +1,9 @@
 import { PRODUCTION_CONFIG, calculateTreesNeeded } from '@/app/config/production.config';
 import { NetworkMetrics, LayerMetrics, NodeLocation } from './types';
 
-// Fixed genesis timestamp - Monday, September 22, 2025, 12:58:00 AM UTC (9 hours before 9:58 AM UTC)
+// Fixed genesis timestamp - September 22, 2025, 09:06:42 UTC
 // This ensures consistent offset calculations across all page loads
-const GENESIS_TIMESTAMP = new Date('2025-09-22T00:58:00Z').getTime();
+const GENESIS_TIMESTAMP = new Date('2025-09-22T09:06:42Z').getTime();
 
 /**
  * Calculate real-time carbon credits purchased

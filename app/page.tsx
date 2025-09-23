@@ -171,7 +171,7 @@ export default function Home() {
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-blue-400">30.66</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">26.06</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/day</p>
                     </div>
                   </div>
@@ -216,13 +216,13 @@ export default function Home() {
                         <motion.div
                           className="h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-300 rounded-full shadow-sm relative overflow-hidden"
                           initial={{ width: '0%' }}
-                          animate={{ width: `${Math.min((todayOffset / 30.66) * 100, 100)}%` }}
+                          animate={{ width: `${Math.min((todayOffset / 26.06) * 100, 100)}%` }}
                           transition={{ duration: 0.5 }}
                         >
                           <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10" />
                         </motion.div>
                       </div>
-                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / 30.66) * 100).toFixed(1)}%</span>
+                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / 26.06) * 100).toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -293,7 +293,7 @@ export default function Home() {
                                 How we calculate this:
                               </p>
                               <p className="text-neutral-light">
-                                • Daily emissions: <span className="text-white">30.66 tCO₂</span>
+                                • Daily target: <span className="text-white">26.06 tCO₂</span>
                               </p>
                               <p className="text-neutral-light">
                                 • Total nodes: <span className="text-white">179,471</span>
@@ -345,7 +345,7 @@ export default function Home() {
                 <div className="mb-3 sm:mb-4 text-center">
                   <div className="flex items-baseline gap-1 justify-center">
                     <h4 className="text-xl sm:text-2xl lg:text-3xl font-extralight text-green-400">
-                      508,636
+                      432,332
                     </h4>
                     <span className="text-sm text-green-400 font-normal">trees</span>
                   </div>
@@ -355,7 +355,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-3 relative">
                     <div className="text-center">
-                      <p className="text-base font-light text-white">11,190</p>
+                      <p className="text-base font-light text-white">9,511</p>
                       <p className="text-[9px] text-neutral-light/60">tCO₂/year</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-green-400/30" />
@@ -386,16 +386,16 @@ export default function Home() {
                                 How we calculate this:
                               </p>
                               <p className="text-neutral-light">
-                                • Annual offset: <span className="text-white">11,190 tCO₂</span>
+                                • Annual offset: <span className="text-white">9,511 tCO₂</span>
                               </p>
                               <p className="text-neutral-light">
                                 • Tree absorption: <span className="text-white">0.022 tCO₂/year</span> (EPA)
                               </p>
                               <p className="text-neutral-light">
-                                • 11,190 ÷ 0.022 = <span className="text-green-400">508,636 trees</span>
+                                • 9,511 ÷ 0.022 = <span className="text-green-400">432,332 trees</span>
                               </p>
                               <p className="text-neutral-light/60 mt-1 pt-1 border-t border-white/5">
-                                Equivalent to 1,000 acres of forest
+                                Equivalent to 850 acres of forest
                               </p>
                             </div>
                             <div className="absolute -bottom-1 right-2 w-2 h-2 bg-neutral-darker border-r border-b border-blue-500/20 rotate-45" />
@@ -405,7 +405,7 @@ export default function Home() {
                     </div>
                     <div className="mt-2">
                       <p className="text-xs text-neutral-light">
-                        <span className="text-emerald-400 font-medium">1,000 acres</span> of mature forest absorbing CO₂
+                        <span className="text-emerald-400 font-medium">850 acres</span> of mature forest absorbing CO₂
                       </p>
                     </div>
                   </div>

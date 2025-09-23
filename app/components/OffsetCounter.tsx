@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { Leaf, TrendingUp, Info } from 'lucide-react';
 import { PRODUCTION_CONFIG } from '@/app/config/production.config';
 
-// Calculate genesis time once, outside component to prevent recalculation
-const GENESIS_TIME = Date.now() - (PRODUCTION_CONFIG.GENESIS_HOURS_AGO * 60 * 60 * 1000);
+// Fixed genesis timestamp - September 22, 2025, 09:06:42 UTC
+const GENESIS_TIME = new Date('2025-09-22T09:06:42Z').getTime();
 
 export function OffsetCounter() {
   const [offsetAmount, setOffsetAmount] = useState(0);
@@ -34,7 +34,7 @@ export function OffsetCounter() {
   const creditsPerSecond = PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR / 3600;
 
   // Calculate tree equivalents (1 mature tree absorbs ~22kg CO₂/year = 0.022 tCO₂/year)
-  // Annual offset of 11,190 tCO₂ equals 508,636 mature trees working for a full year
+  // Annual offset of 9,511 tCO₂ equals 432,332 mature trees working for a full year
   const treesEquivalentAnnual = Math.round((annualCredits * 1000) / 22);
 
   return (
@@ -95,13 +95,13 @@ export function OffsetCounter() {
                         How we calculate this:
                       </p>
                       <p className="text-neutral-light">
-                        • ØG offsets <span className="text-white">11,190 tCO₂</span> per year
+                        • ØG offsets <span className="text-white">9,511 tCO₂</span> per year
                       </p>
                       <p className="text-neutral-light">
                         • 1 mature tree absorbs <span className="text-white">~22kg CO₂</span> per year (EPA)
                       </p>
                       <p className="text-neutral-light">
-                        • 11,190,000 kg ÷ 22 kg = <span className="text-green-400">508,636 trees</span>
+                        • 9,511,000 kg ÷ 22 kg = <span className="text-green-400">432,332 trees</span>
                       </p>
                       <p className="text-neutral-light/60 mt-1 pt-1 border-t border-white/5">
                         Equal to a forest the size of Central Park working all year!
