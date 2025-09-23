@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Leaf, TrendingUp, Activity, Server, HardDrive, Database, Cpu, Users, Zap, Heart, FileText, Info } from 'lucide-react';
 import { MetricCard } from './components/MetricCard';
 import { NetworkStatus } from './components/NetworkStatus';
-import { CarbonOffsetScanner } from './components/CarbonOffsetScanner';
+import { ImpactScanner } from './components/ImpactScanner';
 import { LiveCounter } from './components/LiveCounter';
 import {
   getNetworkMetrics,
@@ -574,9 +574,9 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mb-16"
+          className="mb-8"
         >
-          <CarbonOffsetScanner />
+          <ImpactScanner />
         </motion.section>
 
         {/* ØImpact Engine Section */}
@@ -585,7 +585,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
-          className="pt-20 pb-12 mb-8"
+          className="pt-8 pb-12 mb-8"
         >
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-6 md:mb-8 leading-[1.2]">
