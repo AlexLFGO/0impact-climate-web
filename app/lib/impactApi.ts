@@ -132,8 +132,6 @@ class ImpactAPI {
         });
 
         fetchUrl = `/api/impact?${params.toString()}`;
-        console.log('Using proxy:', fetchUrl);
-        console.log('Original URL was:', url);
       }
 
       const response = await fetch(fetchUrl, {
