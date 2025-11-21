@@ -12,9 +12,7 @@ import {
   getNetworkMetrics,
   getLayerMetrics,
   getHistoricalData,
-  subscribeToMetrics,
-  getCumulativeOffset,
-  getTodayOffset
+  subscribeToMetrics
 } from './lib/productionData';
 import { PRODUCTION_CONFIG } from './config/production.config';
 import type { NetworkMetrics } from './lib/types';
@@ -24,23 +22,56 @@ export default function Home() {
   const [layerMetrics, setLayerMetrics] = useState(getLayerMetrics());
   const [cumulativeOffset, setCumulativeOffset] = useState(0);
   const [todayOffset, setTodayOffset] = useState(0);
+  const [maxDaily, setMaxDaily] = useState(27); // Default from API
   const [isClient, setIsClient] = useState(false);
+  const [isLoadingCarbon, setIsLoadingCarbon] = useState(true);
+  const [loadingValue, setLoadingValue] = useState(0);
   const [showEfficiencyTooltip, setShowEfficiencyTooltip] = useState(false);
   const [showTreeTooltip, setShowTreeTooltip] = useState(false);
   const [showProgressTooltip, setShowProgressTooltip] = useState(false);
   const historicalData = getHistoricalData(30);
 
+  // Fetch carbon offset data from API
+  const fetchCarbonData = async () => {
+    try {
+      const response = await fetch('/api/impact?endpoint=/status');
+      if (response.ok) {
+        const data = await response.json();
+        setCumulativeOffset(parseFloat(data.totalRetired) || 0);
+        setTodayOffset(parseFloat(data.dailyRetired) || 0);
+        setMaxDaily(parseFloat(data.maxDaily) || 27);
+        setIsLoadingCarbon(false);
+      }
+    } catch (error) {
+      console.error('Failed to fetch carbon data:', error);
+      setIsLoadingCarbon(false);
+    }
+  };
+
   useEffect(() => {
     setIsClient(true);
-    // Subscribe to real-time metrics updates
+
+    // Loading counter animation
+    const loadingInterval = setInterval(() => {
+      setLoadingValue(prev => prev + Math.random() * 2);
+    }, 50);
+
+    // Fetch carbon data from API
+    fetchCarbonData().then(() => clearInterval(loadingInterval));
+
+    // Poll for updates every 30 seconds
+    const carbonInterval = setInterval(fetchCarbonData, 30000);
+
+    // Subscribe to real-time metrics updates (for other metrics)
     const unsubscribe = subscribeToMetrics((newMetrics) => {
       setMetrics(newMetrics);
-      setCumulativeOffset(getCumulativeOffset());
-      setTodayOffset(getTodayOffset());
       // Layer metrics are static, don't regenerate them
     });
 
-    return unsubscribe;
+    return () => {
+      clearInterval(carbonInterval);
+      unsubscribe();
+    };
   }, []);
 
 
@@ -157,22 +188,24 @@ export default function Home() {
                 <div className="mb-3 sm:mb-4 text-center">
                   <div className="flex items-baseline gap-1 justify-center">
                     <h4 className="text-xl sm:text-2xl lg:text-3xl font-extralight text-blue-400">
-                      {isClient ? cumulativeOffset.toFixed(3) : '0.000'}
+                      {isClient ? (
+                        isLoadingCarbon ? loadingValue.toFixed(3) : cumulativeOffset.toFixed(3)
+                      ) : '0.000'}
                     </h4>
                     <span className="text-xs sm:text-sm text-blue-400 font-normal">tCO₂</span>
                   </div>
-                  <p className="text-[9px] sm:text-[10px] text-neutral-light/60 uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium mt-1 sm:mt-2">SINCE GENESIS</p>
+                  <p className="text-[9px] sm:text-[10px] text-neutral-light/60 uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium mt-1 sm:mt-2">TOTAL RETIRED</p>
                 </div>
 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-white">{PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR.toFixed(2)}</p>
+                      <p className="text-sm sm:text-base font-light text-white">{(maxDaily / 24).toFixed(2)}</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/hour</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-blue-400">{(PRODUCTION_CONFIG.CARBON_CREDITS_PER_HOUR * 24).toFixed(2)}</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">{maxDaily.toFixed(2)}</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/day</p>
                     </div>
                   </div>
@@ -217,13 +250,13 @@ export default function Home() {
                         <motion.div
                           className="h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-300 rounded-full shadow-sm relative overflow-hidden"
                           initial={{ width: '0%' }}
-                          animate={{ width: `${Math.min((todayOffset / 26.06) * 100, 100)}%` }}
+                          animate={{ width: `${Math.min((todayOffset / maxDaily) * 100, 100)}%` }}
                           transition={{ duration: 0.5 }}
                         >
                           <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10" />
                         </motion.div>
                       </div>
-                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / 26.06) * 100).toFixed(1)}%</span>
+                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / maxDaily) * 100).toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -294,7 +327,7 @@ export default function Home() {
                                 How we calculate this:
                               </p>
                               <p className="text-neutral-light">
-                                • Daily target: <span className="text-white">26.06 tCO₂</span>
+                                • Daily target: <span className="text-white">{maxDaily.toFixed(2)} tCO₂</span>
                               </p>
                               <p className="text-neutral-light">
                                 • Total nodes: <span className="text-white">179,471</span>
