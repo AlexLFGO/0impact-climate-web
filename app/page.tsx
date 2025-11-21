@@ -40,10 +40,10 @@ export default function Home() {
         setCumulativeOffset(parseFloat(data.totalRetired) || 0);
         setTodayOffset(parseFloat(data.dailyRetired) || 0);
         setMaxDaily(parseFloat(data.maxDaily) || 27);
-        setIsLoadingCarbon(false);
       }
     } catch (error) {
       console.error('Failed to fetch carbon data:', error);
+    } finally {
       setIsLoadingCarbon(false);
     }
   };
@@ -57,7 +57,7 @@ export default function Home() {
     }, 50);
 
     // Fetch carbon data from API
-    fetchCarbonData().then(() => clearInterval(loadingInterval));
+    fetchCarbonData().finally(() => clearInterval(loadingInterval));
 
     // Poll for updates every 30 seconds
     const carbonInterval = setInterval(fetchCarbonData, 30000);
@@ -69,6 +69,7 @@ export default function Home() {
     });
 
     return () => {
+      clearInterval(loadingInterval);
       clearInterval(carbonInterval);
       unsubscribe();
     };
