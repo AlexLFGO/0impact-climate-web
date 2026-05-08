@@ -9,11 +9,10 @@ export const PRODUCTION_CONFIG = {
   // Update frequency in milliseconds (3 seconds for live feel)
   UPDATE_INTERVAL: 3000,
 
-  // Carbon credit purchase rate for carbon neutrality
-  // Annual emissions: 9,511.3264 tCO₂ (scaled by 0.8524375512 factor)
-  // To offset 100%: 9,511.3264 tCO₂/year ÷ 365 days ÷ 24 hours = 1.0857 tCO₂/hour
-  // 1 carbon credit = 1 tCO₂ removed
-  CARBON_CREDITS_PER_HOUR: 1.0857, // Carbon credits (tCO₂) purchased per hour
+  // Legacy modeling constant — no longer drives any rendered metric. Retained for
+  // dead-code components (OffsetCounter / LiveEmissions) that compute illustrative figures.
+  // Matches new retirement cadence: 0.06 tCO₂/hour = 0.005 every 5 min.
+  CARBON_CREDITS_PER_HOUR: 0.06,
 
   // Genesis timestamp (6 hours before deployment)
   GENESIS_HOURS_AGO: 6, // Network started 6 hours ago

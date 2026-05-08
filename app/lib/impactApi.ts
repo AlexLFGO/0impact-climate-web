@@ -213,10 +213,10 @@ export const impactApi = new ImpactAPI();
 
 // Constants for the scanner
 export const IMPACT_CONSTANTS = {
-  CONSUMPTION_RATE: 1.0857, // tCO₂/hour
+  CONSUMPTION_RATE: 0.06, // tCO₂/hour
   RETIREMENT_FREQUENCY: 5, // minutes
-  PER_TRANSACTION: 0.09, // tCO₂
-  DAILY_TARGET: 27, // tCO₂
+  PER_TRANSACTION: 0.005, // tCO₂
+  DAILY_TARGET: 2, // tCO₂
   WALLET_ADDRESS: 'regen1xfw890d6chkud69c9h3rrhcgjg4zaqaqf0543r',
   BLOCKCHAIN: '0g-Mainnet-Aristotle',
   EXPLORER_BASE: 'https://www.mintscan.io/regen/tx/',

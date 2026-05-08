@@ -45,7 +45,7 @@ export function OffsetCounter() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Leaf className="w-5 h-5 text-green-400" />
-            <h3 className="text-base sm:text-lg font-light text-white">Carbon-Neutral Since Genesis</h3>
+            <h3 className="text-base sm:text-lg font-light text-white">Credits retired since genesis</h3>
           </div>
         </div>
 

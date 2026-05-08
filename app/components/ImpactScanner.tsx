@@ -101,7 +101,7 @@ export function ImpactScanner() {
     const secondsUntil = minutesUntil * 60 - seconds;
 
     if (secondsUntil <= 0) {
-      setTimeUntilNext('Offsetting now...');
+      setTimeUntilNext('Retiring now...');
     } else if (secondsUntil < 60) {
       setTimeUntilNext(`${secondsUntil}s`);
     } else {
@@ -200,14 +200,14 @@ export function ImpactScanner() {
                   Real-time transparency layer for decentralized AI carbon accounting
                 </h3>
                 <p className="text-xs text-white/50">
-                  Powered by ecoBridge • Verified on-chain • Continuous offsetting
+                  Powered by ecoBridge • Verified on-chain • Continuous retirements
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                 <h3 className="text-base sm:text-lg font-light text-white flex items-center gap-2">
                   <Trees className="w-4 sm:w-5 h-4 sm:h-5 text-green-400" />
-                  Recent Offsets
+                  Recent Retirements
                 </h3>
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="flex items-center gap-1.5 sm:gap-2 bg-green-500/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-green-500/20">
@@ -387,7 +387,7 @@ export function ImpactScanner() {
                             0impact.ai • Agent Zero
                             <span className="text-[9px] text-purple-400/80 font-normal">#000</span>
                           </h4>
-                          <p className="text-xs text-white/60">Autonomous Carbon Offsetting Intelligence</p>
+                          <p className="text-xs text-white/60">Autonomous Credit Retirement Intelligence</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-full border border-green-500/20 backdrop-blur-sm">

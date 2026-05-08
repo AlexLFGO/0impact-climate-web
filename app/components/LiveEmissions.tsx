@@ -63,14 +63,14 @@ export function LiveEmissions() {
           <div className="metric-value mb-2">
             {transactions.toLocaleString()}
           </div>
-          <p className="metric-label">Carbon-Neutral Transactions</p>
-          <p className="text-xs text-neutral-light mt-1">Every block offset automatically</p>
+          <p className="metric-label">Documented retirements</p>
+          <p className="text-xs text-neutral-light mt-1">Every block tracked on-chain</p>
         </div>
       </div>
       
       <div className="mt-6 text-center">
         <p className="text-sm text-neutral-light">
-          Each transaction on ØG contributes to carbon offsets through our consensus mechanism
+          Each transaction on ØG is tracked through our retirement pipeline
         </p>
       </div>
     </motion.div>

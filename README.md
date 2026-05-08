@@ -8,7 +8,7 @@ This dashboard provides transparent, data-driven insights into ØG's carbon emis
 
 ## Features
 
-- **Live Network Impact**: Real-time tracking of carbon offsets, clean energy usage, and carbon-neutral transactions
+- **Live Network Impact**: Real-time tracking of credit retirements, clean energy usage, and documented climate accounting
 - **Layer-by-Layer Analysis**: Detailed metrics for each ØG network layer (Chain, Storage, DA, Compute, Alignment)
 - **Emissions Tracking**: Historical data visualization showing trends and improvements
 - **Carbon-Aware Consensus**: Explanation of how ØG's consensus mechanism automatically offsets emissions

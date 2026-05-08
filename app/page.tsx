@@ -146,14 +146,14 @@ export default function Home() {
           className="text-center mb-20 pt-12 -mx-4 sm:-mx-6 lg:-mx-8"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-6 md:mb-8 leading-[1.2] px-4">
-            <span className="text-white block">Ø Emissions.</span>
+            <span className="text-white block">Transparent climate</span>
             <span className="gradient-text block mt-2">
-              Infinite&nbsp;Scale.
+              accounting for 0G.
             </span>
           </h2>
           <div className="max-w-2xl mx-auto px-4">
             <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed">
-              The first AI blockchain <span className="text-purple-400 font-normal">carbon-neutral from genesis</span>.
+              Estimated network emissions, documented credit retirements, and transparent methodology for decentralized AI infrastructure.
             </p>
           </div>
         </motion.div>
@@ -176,8 +176,8 @@ export default function Home() {
                   <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-blue-500/10 border border-blue-500/20">
                     <Leaf className="w-4 sm:w-5 h-4 sm:h-5 text-blue-400" />
                   </div>
-                  <span className="hidden sm:inline">Carbon Offset</span>
-                  <span className="sm:hidden">Carbon</span>
+                  <span className="hidden sm:inline">Credits retired on Regen Registry</span>
+                  <span className="sm:hidden">Regen Registry</span>
                 </h3>
                 <div className="flex items-center gap-1.5 sm:gap-2 bg-blue-500/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-blue-500/20">
                   <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
@@ -187,27 +187,32 @@ export default function Home() {
 
               <div className="flex-1 flex flex-col justify-between">
                 <div className="mb-3 sm:mb-4 text-center">
-                  <div className="flex items-baseline gap-1 justify-center">
+                  <div className="flex items-baseline gap-1 justify-center flex-wrap">
                     <h4 className="text-xl sm:text-2xl lg:text-3xl font-extralight text-blue-400">
-                      {isClient ? (
-                        isLoadingCarbon ? loadingValue.toFixed(3) : cumulativeOffset.toFixed(3)
-                      ) : '0.000'}
+                      {isClient && !isLoadingCarbon
+                        ? `${Math.max(4000, Math.floor(cumulativeOffset / 100) * 100).toLocaleString()}+`
+                        : '4,000+'}
                     </h4>
-                    <span className="text-xs sm:text-sm text-blue-400 font-normal">tCO₂</span>
+                    <span className="text-xs sm:text-sm text-blue-400 font-normal">tCO₂e retired</span>
                   </div>
-                  <p className="text-[9px] sm:text-[10px] text-neutral-light/60 uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium mt-1 sm:mt-2">TOTAL RETIRED</p>
+                  <p className="text-[10px] sm:text-[11px] text-neutral-light/70 mt-1 sm:mt-2">
+                    <a href="#impact-scanner" className="hover:text-blue-300 transition-colors underline-offset-2 hover:underline">
+                      Every retirement record is publicly viewable on the scan ↓
+                    </a>
+                  </p>
                 </div>
 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-white">{(maxDaily / 24).toFixed(2)}</p>
-                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/hour</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Current cadence</p>
+                      <p className="text-sm sm:text-base font-light text-white">0.005 tCO₂e</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">every 5 min</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
                     <div className="text-center">
-                      <p className="text-sm sm:text-base font-light text-blue-400">{maxDaily.toFixed(2)}</p>
-                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">tCO₂/day</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Credit source</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">City Forest Credits</p>
                     </div>
                   </div>
 
@@ -232,7 +237,7 @@ export default function Home() {
                                 How we track this:
                               </p>
                               <p className="text-neutral-light">
-                                • Synchronized with <span className="text-white">live offsets</span>
+                                • Synchronized with <span className="text-white">live retirements</span>
                               </p>
                               <p className="text-neutral-light">
                                 • Resets daily at <span className="text-blue-400">midnight UTC</span>
@@ -257,7 +262,7 @@ export default function Home() {
                           <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10" />
                         </motion.div>
                       </div>
-                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{((todayOffset / maxDaily) * 100).toFixed(1)}%</span>
+                      <span className="text-blue-400 font-semibold text-[11px] sm:text-xs min-w-[40px] sm:min-w-[45px]">{Math.min((todayOffset / maxDaily) * 100, 100).toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -372,7 +377,7 @@ export default function Home() {
                   <div className="p-2 rounded-xl bg-green-500/10 border border-green-500/20">
                     <TrendingUp className="w-5 h-5 text-green-400" />
                   </div>
-                  Positive Impact
+                  Tree-equivalent estimate
                 </h3>
               </div>
 
@@ -384,25 +389,20 @@ export default function Home() {
                     </h4>
                     <span className="text-sm text-green-400 font-normal">trees</span>
                   </div>
-                  <p className="text-[10px] text-neutral-light/60 uppercase tracking-[0.15em] font-medium mt-2">WORKING YEAR-ROUND</p>
+                  <p className="text-[10px] text-neutral-light/60 uppercase tracking-[0.15em] font-medium mt-2">ILLUSTRATIVE ESTIMATE</p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-3 relative">
+                  <div className="grid grid-cols-1 gap-3 relative">
                     <div className="text-center">
-                      <p className="text-base font-light text-white">9,511</p>
-                      <p className="text-[9px] text-neutral-light/60">tCO₂/year</p>
-                    </div>
-                    <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-green-400/30" />
-                    <div className="text-center">
-                      <p className="text-lg font-extralight text-green-400">100%</p>
-                      <p className="text-[9px] text-neutral-light/60">carbon neutral</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Modeled annual emissions</p>
+                      <p className="text-base font-light text-white">9,511 <span className="text-[9px] text-neutral-light/60">tCO₂/year</span></p>
                     </div>
                   </div>
 
                   <div className="bg-green-500/5 rounded-xl p-4 border border-green-500/10 min-h-[90px] flex flex-col">
                     <div className="flex items-center justify-between text-[11px] mb-2">
-                      <span className="text-neutral-light font-medium">Environmental Comparison</span>
+                      <span className="text-neutral-light font-medium">Tree-equivalent estimate</span>
                       <div
                         className="relative"
                         onMouseEnter={() => setShowTreeTooltip(true)}
@@ -418,19 +418,16 @@ export default function Home() {
                           >
                             <div className="text-[10px] space-y-1.5">
                               <p className="text-green-400 font-medium mb-1">
-                                How we calculate this:
+                                Illustrative estimate only.
                               </p>
                               <p className="text-neutral-light">
-                                • Annual offset: <span className="text-white">9,511 tCO₂</span>
+                                • Modeled annual emissions: <span className="text-white">9,511 tCO₂</span>
                               </p>
                               <p className="text-neutral-light">
                                 • Tree absorption: <span className="text-white">0.022 tCO₂/year</span> (EPA)
                               </p>
                               <p className="text-neutral-light">
-                                • 9,511 ÷ 0.022 = <span className="text-green-400">432,332 trees</span>
-                              </p>
-                              <p className="text-neutral-light/60 mt-1 pt-1 border-t border-white/5">
-                                Equivalent to 850 acres of forest
+                                • 9,511 ÷ 0.022 = <span className="text-green-400">~432,332 trees</span>
                               </p>
                             </div>
                             <div className="absolute -bottom-1 right-2 w-2 h-2 bg-neutral-darker border-r border-b border-blue-500/20 rotate-45" />
@@ -439,8 +436,8 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="mt-2">
-                      <p className="text-xs text-neutral-light">
-                        <span className="text-emerald-400 font-medium">850 acres</span> of mature forest absorbing CO₂
+                      <p className="text-xs text-neutral-light/70 italic">
+                        Illustrative estimate only.
                       </p>
                     </div>
                   </div>
@@ -605,10 +602,11 @@ export default function Home() {
 
         {/* ØG Impact Scanner - Main Feature */}
         <motion.section
+          id="impact-scanner"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mb-8"
+          className="mb-8 scroll-mt-24"
         >
           <ImpactScanner />
         </motion.section>
@@ -628,7 +626,7 @@ export default function Home() {
             </h2>
 
             <p className="text-xl sm:text-2xl text-green-400 font-medium max-w-3xl mx-auto mb-8 px-4">
-              Earn competitive yields while helping ØG lead carbon-neutral decentralized AI.
+              Earn competitive yields while supporting transparent climate accounting for decentralized AI.
             </p>
 
             <a
@@ -722,6 +720,11 @@ export default function Home() {
               <div className="mt-3 text-center">
                 <p className="text-[9px] text-white/50">
                   Methodology aligned with EU standards. All transactions viewable on-chain in Impact Scanner.
+                </p>
+                <p className="text-[10px] text-purple-400/80 mt-2">
+                  <a href="/methodology" className="hover:text-purple-300 transition-colors underline-offset-2 hover:underline">
+                    Read full methodology →
+                  </a>
                 </p>
               </div>
             </div>
