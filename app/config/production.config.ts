@@ -11,8 +11,8 @@ export const PRODUCTION_CONFIG = {
 
   // Legacy modeling constant — no longer drives any rendered metric. Retained for
   // dead-code components (OffsetCounter / LiveEmissions) that compute illustrative figures.
-  // Matches new retirement cadence: 0.06 tCO₂/hour = 0.005 every 5 min.
-  CARBON_CREDITS_PER_HOUR: 0.06,
+  // Matches live retirement cadence: 1.0857 tCO₂/hour = 0.0905 every 5 min = 9,511 t/year.
+  CARBON_CREDITS_PER_HOUR: 1.0857,
 
   // Genesis timestamp (6 hours before deployment)
   GENESIS_HOURS_AGO: 6, // Network started 6 hours ago

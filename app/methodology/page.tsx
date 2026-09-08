@@ -4,15 +4,15 @@ import Link from 'next/link';
 import { ArrowLeft, FileText, ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Methodology — 0G Climate Dashboard',
-  description: 'Conservative-estimate methodology for documented credit retirements and covered 0G network emissions.',
+  title: 'Methodology — ØG Climate Dashboard',
+  description: 'Conservative-estimate methodology for documented credit retirements and covered ØG network emissions.',
   robots: { index: true, follow: true },
 };
 
 const FIELDS: Array<{ label: string; value: string }> = [
-  { label: 'Covered emissions', value: 'Selected 0G network activity' },
-  { label: 'Credit source', value: 'City Forest Credits' },
-  { label: 'Retirement cadence', value: '0.005 tCO₂e every 5 minutes' },
+  { label: 'Covered emissions', value: 'Selected ØG network activity' },
+  { label: 'Credit source', value: 'Verified Carbon Standard (Regen C03)' },
+  { label: 'Retirement cadence', value: '0.0905 tCO₂e every 5 minutes' },
   { label: 'Methodology type', value: 'Conservative estimate' },
 ];
 
@@ -64,9 +64,10 @@ export default function MethodologyPage() {
         </h1>
 
         <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10">
-          This dashboard uses conservative estimates for covered 0G network emissions and compares
-          them with documented credit retirements. Current retirements use City Forest Credits at a
-          cadence of approximately 0.005 tCO₂e every five minutes.
+          This dashboard uses conservative estimates for covered ØG network emissions and compares
+          them with documented credit retirements. Current retirements use the Regen Registry
+          Verified Carbon Standard credit class at 0.0905 tCO₂e every five minutes
+          (9,511 tCO₂e/year).
         </p>
 
         <section className="mb-10">
@@ -93,7 +94,7 @@ export default function MethodologyPage() {
             Covered emissions
           </h2>
           <p className="text-sm text-white/70 leading-relaxed">
-            Modeled emissions cover selected 0G network activity. Inputs include per-node power
+            Modeled emissions cover selected ØG network activity. Inputs include per-node power
             assumptions, hardware utilization patterns, and a global-average grid carbon intensity.
             Estimates are intentionally conservative; they do not assert full coverage of every
             node, region, or workload.
@@ -106,11 +107,12 @@ export default function MethodologyPage() {
           </h2>
           <p className="text-sm text-white/70 leading-relaxed mb-3">
             Each retirement record is publicly viewable in the Impact Scanner on the dashboard,
-            with on-chain transaction hashes and certificate metadata. Historical retirements were
-            executed on the Regen Registry; new retirement activity uses City Forest Credits.
+            with on-chain transaction hashes and certificate metadata. Retirements are executed
+            on the Regen Registry. Current activity uses the Verified Carbon Standard credit
+            class (C03).
           </p>
           <p className="text-sm text-white/70 leading-relaxed">
-            Retirement cadence: <span className="text-white">0.005 tCO₂e every 5 minutes</span>.
+            Retirement cadence: <span className="text-white">0.0905 tCO₂e every 5 minutes</span>.
           </p>
         </section>
 

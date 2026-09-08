@@ -148,7 +148,7 @@ export default function Home() {
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-6 md:mb-8 leading-[1.2] px-4">
             <span className="text-white block">Transparent climate</span>
             <span className="gradient-text block mt-2">
-              accounting for 0G.
+              accounting for ØG.
             </span>
           </h2>
           <div className="max-w-2xl mx-auto px-4">
@@ -206,13 +206,13 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Current cadence</p>
-                      <p className="text-sm sm:text-base font-light text-white">0.005 tCO₂e</p>
+                      <p className="text-sm sm:text-base font-light text-white">0.0905 tCO₂e</p>
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60">every 5 min</p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
                     <div className="text-center">
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Credit source</p>
-                      <p className="text-sm sm:text-base font-light text-blue-400">City Forest Credits</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">Verified Carbon Standard</p>
                     </div>
                   </div>
 

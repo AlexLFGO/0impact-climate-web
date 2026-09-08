@@ -213,10 +213,10 @@ export const impactApi = new ImpactAPI();
 
 // Constants for the scanner
 export const IMPACT_CONSTANTS = {
-  CONSUMPTION_RATE: 0.06, // tCO₂/hour
+  CONSUMPTION_RATE: 1.0857, // tCO₂/hour
   RETIREMENT_FREQUENCY: 5, // minutes
-  PER_TRANSACTION: 0.005, // tCO₂
-  DAILY_TARGET: 2, // tCO₂
+  PER_TRANSACTION: 0.0905, // tCO₂
+  DAILY_TARGET: 27, // tCO₂ (worker cap; ~26.06 t/day at this tick)
   WALLET_ADDRESS: 'regen1xfw890d6chkud69c9h3rrhcgjg4zaqaqf0543r',
   BLOCKCHAIN: '0g-Mainnet-Aristotle',
   EXPLORER_BASE: 'https://www.mintscan.io/regen/tx/',
@@ -228,8 +228,28 @@ export const IMPACT_CONSTANTS = {
     },
     {
       id: 'C03-002',
-      name: 'Mai Ndombe REDD+ Project',
+      name: 'REDD+ Project RIU SM',
       batch: 'C03-002-20190101-20191231-001',
+    },
+    {
+      id: 'C03-006',
+      name: 'Verified Carbon Standard project C03-006',
+      batch: 'C03-006-20150101-20151231-001',
+    },
+    {
+      id: 'C03-008',
+      name: 'Verified Carbon Standard project C03-008',
+      batch: 'C03-008-20120101-20121231-001',
+    },
+    {
+      id: 'C03-003',
+      name: 'Verified Carbon Standard project C03-003',
+      batch: 'C03-003-20150101-20151231-001',
+    },
+    {
+      id: 'C03-007',
+      name: 'Verified Carbon Standard project C03-007',
+      batch: 'C03-007-20140101-20141231-003',
     },
   ],
 };
