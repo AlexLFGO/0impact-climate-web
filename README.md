@@ -57,6 +57,25 @@ npm run build
 npm start
 ```
 
+### Configuration
+
+- `IMPACT_API_BASE_URL` (server-side only, optional): upstream worker for the `/api/impact` proxy.
+  Defaults to `https://api.0impact.ai`; set e.g. `http://localhost:8787` to test against a local
+  worker. Must be a plain http(s) URL (no credentials, query or fragment); an invalid value makes
+  the proxy return HTTP 500. The proxy only forwards the allow-listed read-only endpoints
+  (`/status`, `/transactions`, `/certificates`, `/certificate`, `/daily-summary`, `/consumption`,
+  `/health`).
+
+### Tests
+
+```bash
+npm test
+```
+
+The tests import the `.ts` sources directly, so they need Node.js 22.18 or later. To also check the
+retirement-reason parser against the Mode D conformance vectors, set
+`MODE_D_VECTORS=/path/to/mode-d-conformance/vectors/test_vectors.json`.
+
 ## Data Sources & Methodology
 
 The emissions calculations are based on:

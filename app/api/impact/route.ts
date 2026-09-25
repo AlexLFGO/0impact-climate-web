@@ -1,25 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-const API_BASE_URL = 'https://api.0impact.ai';
+import { buildUpstreamUrl, resolveApiBase, resolveEndpoint } from '../../lib/impactProxy';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const endpoint = searchParams.get('endpoint');
+  const rawEndpoint = searchParams.get('endpoint');
 
-  if (!endpoint) {
+  if (!rawEndpoint) {
     return NextResponse.json({ error: 'No endpoint specified' }, { status: 400 });
+  }
+
+  const endpoint = resolveEndpoint(rawEndpoint);
+  if (!endpoint) {
+    return NextResponse.json({ error: 'Endpoint not allowed' }, { status: 400 });
+  }
+
+  const apiBase = resolveApiBase(process.env.IMPACT_API_BASE_URL);
+  if (!apiBase) {
+    console.error('Proxy misconfigured: IMPACT_API_BASE_URL is not a valid http(s) URL');
+    return NextResponse.json({ error: 'Proxy misconfigured' }, { status: 500 });
   }
 
   try {
     // Build the full URL with all query params
-    const url = new URL(endpoint, API_BASE_URL);
-
-    // Copy all search params except 'endpoint' to the target URL
-    searchParams.forEach((value, key) => {
-      if (key !== 'endpoint') {
-        url.searchParams.set(key, value);
-      }
-    });
+    const url = buildUpstreamUrl(apiBase, endpoint, searchParams);
 
     console.log('Proxy request details:');
     console.log('  Endpoint:', endpoint);

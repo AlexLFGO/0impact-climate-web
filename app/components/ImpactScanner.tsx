@@ -232,6 +232,8 @@ export function ImpactScanner() {
                     const bgColor = isEven ? 'bg-green-500/10' : 'bg-purple-500/10';
                     const borderColor = isEven ? 'border-green-500/20' : 'border-purple-500/20';
                     const textColor = isEven ? 'text-green-400' : 'text-purple-400';
+                    // Only a successful row is an on-chain retirement; failed or pending attempts show no amount.
+                    const retired = tx.status === 'success';
 
                     return (
                       <motion.div
@@ -252,7 +254,9 @@ export function ImpactScanner() {
                             </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
-                              <p className="text-sm font-medium text-white">{tx.co2e_tons} tCO₂</p>
+                              <p className={`text-sm font-medium ${retired ? 'text-white' : 'text-white/50'}`}>
+                                {retired ? `${tx.co2e_tons} tCO₂` : tx.status === 'pending' ? 'Pending' : 'Not retired'}
+                              </p>
                               <p className="text-[10px] sm:text-xs text-white/60 truncate">{tx.project_name}</p>
                             </div>
                             <p className="text-[9px] sm:text-[10px] text-white/40">{getTimeSinceLastOffset(tx.created_at)}</p>
@@ -261,7 +265,7 @@ export function ImpactScanner() {
 
                         {/* Right: Verified badge and arrow */}
                         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                          {tx.certificate_generated === 1 && (
+                          {retired && tx.certificate_generated === 1 && (
                             <span className="px-1.5 py-0.5 bg-green-500/10 border border-green-500/20 rounded text-[8px] sm:text-[9px] text-green-400 font-medium">
                               VERIFIED
                             </span>
@@ -450,7 +454,7 @@ export function ImpactScanner() {
 
                     <div className="mt-3 pt-3 border-t border-white/5">
                       <p className="text-[10px] sm:text-xs text-white/50 leading-relaxed">
-                        Processing continuous carbon credit retirements. All transactions verified on Regen Network.
+                        Processing continuous carbon credit retirements. Each successful retirement is verifiable on Regen Network.
                       </p>
                     </div>
                   </div>

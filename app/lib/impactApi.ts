@@ -2,12 +2,51 @@ export interface SystemStatus {
   dailyRetired: string;
   maxDaily: string;
   canRetire: boolean;
+  totalRetired?: string;
+  totalTransactions?: number;
   recentTransactions: Transaction[];
   currentBatchRotation?: {
     batchDenoms: string[];
-    lastUsed: string;
+    lastUsed: string | null;
     nextBatch: string;
   };
+  /** Present only when the worker runs wholesale (Mode D) retirements. Only `beneficiary` is read. */
+  modeD?: ModeDStatus;
+}
+
+/**
+ * Wholesale (Mode D) block of /status, as returned by the 0impact-offset worker's
+ * modeDStatus(). The worker owns this shape; every field is optional so the dashboard
+ * keeps working if fields are added, renamed or dropped. The dashboard only reads
+ * `beneficiary` (methodology copy).
+ */
+export interface ModeDStatus {
+  enabled?: boolean;
+  /** Customer the retirements are made for (worker RETIREMENT_BENEFICIARY). */
+  beneficiary?: string;
+  configErrors?: string[];
+  /** Mode D Wallet that holds the credits (MsgRetire owner). */
+  owner?: string | null;
+  /** Authorized Key that signs MsgExec under the authz grant and pays gas. */
+  signer?: string;
+  grant?: {
+    /** 'OK' | 'MISSING' | 'EXPIRED' | 'UNKNOWN' */
+    status?: string;
+    expiration?: string | null;
+    daysLeft?: number | null;
+    checkedAt?: string;
+  } | null;
+  ownerBalance?: { denom?: string; tradable?: string; retired?: string; checkedAt?: string } | null;
+  /** Active batch-store row (worker-internal; not rendered). */
+  active?: Record<string, unknown> | null;
+  queuedCount?: number;
+  queuedQty?: string;
+  perTick?: string;
+  maxDaily?: string;
+  daysLeft?: number | null;
+  pendingIntents?: string[];
+  lastError?: { at?: string; class?: string; message?: string } | null;
+  [key: string]: unknown;
 }
 
 export interface Transaction {

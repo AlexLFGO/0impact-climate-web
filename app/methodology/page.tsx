@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, FileText, ExternalLink } from 'lucide-react';
+import { CurrentRetirementNote, LatestRetirementFields } from '../components/LatestRetirementFields';
 
 export const metadata: Metadata = {
   title: 'Methodology — ØG Climate Dashboard',
@@ -11,8 +12,6 @@ export const metadata: Metadata = {
 
 const FIELDS: Array<{ label: string; value: string }> = [
   { label: 'Covered emissions', value: 'Selected ØG network activity' },
-  { label: 'Credit source', value: 'Verified Carbon Standard (Regen C03)' },
-  { label: 'Retirement cadence', value: '0.0905 tCO₂e every 5 minutes' },
   { label: 'Methodology type', value: 'Conservative estimate' },
 ];
 
@@ -65,9 +64,7 @@ export default function MethodologyPage() {
 
         <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10">
           This dashboard uses conservative estimates for covered ØG network emissions and compares
-          them with documented credit retirements. Current retirements use the Regen Registry
-          Verified Carbon Standard credit class at 0.0905 tCO₂e every five minutes
-          (9,511 tCO₂e/year).
+          them with documented credit retirements recorded on Regen Ledger.
         </p>
 
         <section className="mb-10">
@@ -86,6 +83,7 @@ export default function MethodologyPage() {
                 <dd className="text-sm sm:text-base font-light text-white">{field.value}</dd>
               </div>
             ))}
+            <LatestRetirementFields />
           </dl>
         </section>
 
@@ -108,11 +106,16 @@ export default function MethodologyPage() {
           <p className="text-sm text-white/70 leading-relaxed mb-3">
             Each retirement record is publicly viewable in the Impact Scanner on the dashboard,
             with on-chain transaction hashes and certificate metadata. Retirements are executed
-            on the Regen Registry. Current activity uses the Verified Carbon Standard credit
-            class (C03).
+            on Regen Ledger and recorded in the Regen Registry.
+          </p>
+          <p className="text-sm text-white/70 leading-relaxed mb-3">
+            Historical retirements used Verra Verified Carbon Standard (VCS) credits and City
+            Forest Credits, retired on Regen Ledger. <CurrentRetirementNote />
           </p>
           <p className="text-sm text-white/70 leading-relaxed">
-            Retirement cadence: <span className="text-white">0.0905 tCO₂e every 5 minutes</span>.
+            When available, the credit source and per-retirement amount shown above come from the
+            most recent successful retirements; each retirement&apos;s Regen Ledger transaction is
+            listed in the Impact Scanner.
           </p>
         </section>
 

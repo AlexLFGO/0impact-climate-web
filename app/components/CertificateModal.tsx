@@ -18,6 +18,9 @@ import {
   Loader2
 } from 'lucide-react';
 import { Certificate, impactApi, getExplorerUrl } from '../lib/impactApi';
+import { describeRetirement, MODE_D_HOLDER, shortAddress } from '../lib/retirementReason';
+
+const MODE_D_NOTE = `Retired on Regen Ledger by Bridge.eco under an authorization granted by ${MODE_D_HOLDER}`;
 
 interface CertificateModalProps {
   isOpen: boolean;
@@ -50,7 +53,6 @@ export function CertificateModal({ isOpen, onClose, certificateId, txHash }: Cer
       console.log('Fetching certificate:', idOrHash, 'isHash:', useHash);
 
       const data = await impactApi.getCertificate(idOrHash, useHash);
-      console.log('Certificate data received:', data);
       setCertificate(data);
     } catch (err: any) {
       console.error('Certificate fetch error:', err);
@@ -80,14 +82,28 @@ export function CertificateModal({ isOpen, onClose, certificateId, txHash }: Cer
     }
   };
 
+  const display = certificate
+    ? describeRetirement(certificate.retirement_reason, certificate.retired_by)
+    : { beneficiary: '', isModeD: false, legacyReason: '' };
+
   const downloadCertificate = () => {
     if (!certificate) return;
+
+    const onBehalfOf = display.beneficiary ? `Retired on behalf of: ${display.beneficiary}\n\n` : '';
+    const heldBy = display.isModeD
+      ? `Credits held by: ${MODE_D_HOLDER} (Mode D Wallet ${certificate.retired_by})`
+      : `Retired By: ${certificate.retired_by}`;
+    const closing = display.isModeD
+      ? MODE_D_NOTE
+      : display.beneficiary
+        ? `Beneficiary: ${display.beneficiary}`
+        : display.legacyReason ? `Reason: ${display.legacyReason}` : '';
 
     const content = `
 CARBON OFFSET CERTIFICATE
 ========================
 
-Certificate ID: ${certificate.certificate_id}
+${onBehalfOf}Certificate ID: ${certificate.certificate_id}
 Retirement Date: ${certificate.retirement_date}
 CO₂ Offset: ${certificate.co2e_tons} tCO₂e
 
@@ -103,9 +119,9 @@ BLOCKCHAIN VERIFICATION
 Transaction Hash: ${certificate.tx_hash}
 Block Height: ${certificate.height}
 Batch: ${certificate.batch_denom}
-Retired By: ${certificate.retired_by}
+${heldBy}
 
-Reason: ${certificate.retirement_reason}
+${closing}
 
 Verified on ecoBridge
 Explorer: ${getExplorerUrl(certificate.tx_hash)}
@@ -198,6 +214,12 @@ Generated: ${new Date().toISOString()}
                           </div>
                         </div>
                       </div>
+
+                      {display.beneficiary && (
+                        <p className="text-lg font-light text-white/80 mb-4 break-words">
+                          Retired on behalf of <span className="text-white font-normal">{display.beneficiary}</span>
+                        </p>
+                      )}
 
                       {/* Logo positioned below header to avoid X button overlap */}
                       <div className="flex justify-end mb-4">
@@ -325,9 +347,15 @@ Generated: ${new Date().toISOString()}
                             </div>
                           </div>
                           <div>
-                            <p className="text-xs text-white/40 mb-1">Retired By</p>
+                            <p className="text-xs text-white/40 mb-1">{display.isModeD ? 'Credits held by' : 'Retired By'}</p>
                             <div className="flex items-center gap-2">
-                              <p className="text-white/80 font-mono text-xs flex-1 truncate">{certificate.retired_by}</p>
+                              {display.isModeD ? (
+                                <p className="text-white/80 text-xs flex-1 truncate" title={certificate.retired_by}>
+                                  {MODE_D_HOLDER} (Mode D Wallet <span className="font-mono">{shortAddress(certificate.retired_by)}</span>)
+                                </p>
+                              ) : (
+                                <p className="text-white/80 font-mono text-xs flex-1 truncate">{certificate.retired_by}</p>
+                              )}
                               <button
                                 onClick={() => copyToClipboard(certificate.retired_by, 'wallet')}
                                 className="p-1.5 rounded-lg hover:bg-white/5 transition-colors"
@@ -343,13 +371,29 @@ Generated: ${new Date().toISOString()}
                         </div>
                       </div>
 
-                      {/* Retirement Reason */}
-                      <div>
-                        <h3 className="text-sm font-medium text-white/60 mb-3">Retirement Reason</h3>
-                        <div className="bg-neutral-darker/30 rounded-xl p-4 border border-white/5">
-                          <p className="text-sm text-white/80 leading-relaxed">{certificate.retirement_reason}</p>
+                      {/* Authorization note (Mode D), beneficiary or old free-text reason (legacy). The raw Mode D reason is never shown. */}
+                      {display.isModeD ? (
+                        <div>
+                          <h3 className="text-sm font-medium text-white/60 mb-3">Retirement</h3>
+                          <div className="bg-neutral-darker/30 rounded-xl p-4 border border-white/5">
+                            <p className="text-sm text-white/80 leading-relaxed">{MODE_D_NOTE}</p>
+                          </div>
                         </div>
-                      </div>
+                      ) : display.beneficiary ? (
+                        <div>
+                          <h3 className="text-sm font-medium text-white/60 mb-3">Beneficiary</h3>
+                          <div className="bg-neutral-darker/30 rounded-xl p-4 border border-white/5">
+                            <p className="text-sm text-white/80 leading-relaxed">{display.beneficiary}</p>
+                          </div>
+                        </div>
+                      ) : display.legacyReason ? (
+                        <div>
+                          <h3 className="text-sm font-medium text-white/60 mb-3">Retirement Reason</h3>
+                          <div className="bg-neutral-darker/30 rounded-xl p-4 border border-white/5">
+                            <p className="text-sm text-white/80 leading-relaxed break-words">{display.legacyReason}</p>
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
 
                     {/* Actions */}

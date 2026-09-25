@@ -16,6 +16,12 @@ import {
 } from './lib/productionData';
 import { PRODUCTION_CONFIG } from './config/production.config';
 import type { NetworkMetrics } from './lib/types';
+import {
+  isCurrentRetirement,
+  retiredOnDate,
+  summarizeLatestRetirement,
+  type LatestRetirementSummary,
+} from './lib/latestRetirement';
 
 export default function Home() {
   const [metrics, setMetrics] = useState<NetworkMetrics>(getNetworkMetrics());
@@ -23,6 +29,7 @@ export default function Home() {
   const [cumulativeOffset, setCumulativeOffset] = useState(0);
   const [todayOffset, setTodayOffset] = useState(0);
   const [maxDaily, setMaxDaily] = useState(27); // Default from API
+  const [latestRetirement, setLatestRetirement] = useState<LatestRetirementSummary | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [isLoadingCarbon, setIsLoadingCarbon] = useState(true);
   const [loadingValue, setLoadingValue] = useState(0);
@@ -40,6 +47,11 @@ export default function Home() {
         setCumulativeOffset(parseFloat(data.totalRetired) || 0);
         setTodayOffset(parseFloat(data.dailyRetired) || 0);
         setMaxDaily(parseFloat(data.maxDaily) || 27);
+        // Keep the last known summary if this refresh has no successful row, but re-check its age.
+        const summary = summarizeLatestRetirement(data.recentTransactions);
+        setLatestRetirement(prev =>
+          summary ?? (prev ? { ...prev, isCurrent: isCurrentRetirement(prev.retiredAt, Date.now()) } : null)
+        );
       }
     } catch (error) {
       console.error('Failed to fetch carbon data:', error);
@@ -205,14 +217,27 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 relative">
                     <div className="text-center">
-                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Current cadence</p>
-                      <p className="text-sm sm:text-base font-light text-white">0.0905 tCO₂e</p>
-                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">every 5 min</p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">
+                        {!latestRetirement || latestRetirement.isCurrent ? 'Current cadence' : 'Most recent'}
+                      </p>
+                      <p className="text-sm sm:text-base font-light text-white">
+                        {latestRetirement ? `${latestRetirement.amount} tCO₂e` : 'Scheduled'}
+                      </p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60">
+                        {!latestRetirement || latestRetirement.isCurrent
+                          ? 'every 5 min'
+                          : retiredOnDate(latestRetirement) || 'no recent retirement'}
+                      </p>
                     </div>
                     <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-400/30" />
-                    <div className="text-center">
+                    <div className="text-center min-w-0 px-1">
                       <p className="text-[8px] sm:text-[9px] text-neutral-light/60 uppercase tracking-wider mb-0.5">Credit source</p>
-                      <p className="text-sm sm:text-base font-light text-blue-400">Verified Carbon Standard</p>
+                      <p className="text-sm sm:text-base font-light text-blue-400">
+                        {latestRetirement ? latestRetirement.creditClass : 'Regen Registry'}
+                      </p>
+                      <p className="text-[8px] sm:text-[9px] text-neutral-light/60 truncate" title={latestRetirement?.projectName || undefined}>
+                        {latestRetirement?.projectName || 'see live retirements below'}
+                      </p>
                     </div>
                   </div>
 
@@ -702,7 +727,7 @@ export default function Home() {
                     <h4 className="text-sm sm:text-base font-light text-white">Verification & Emissions</h4>
                   </div>
                   <p className="text-[11px] sm:text-xs text-neutral-light/60 leading-relaxed mb-3">
-                    ecoBridge tracks emissions and removals via on-chain, registry-certified credits.
+                    ecoBridge tracks estimated emissions and documented credit retirements via on-chain, registry-issued credits.
                   </p>
                   <div className="space-y-2">
                     <a href="/Emissions_Methodology.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2">
