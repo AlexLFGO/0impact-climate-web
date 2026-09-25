@@ -626,7 +626,7 @@ export default function Home() {
             </h2>
 
             <p className="text-xl sm:text-2xl text-green-400 font-medium max-w-3xl mx-auto mb-8 px-4">
-              Earn competitive yields while supporting transparent climate accounting for decentralized AI.
+              Stake with the ØImpact validator. Its commission funds verified real-world impact.
             </p>
 
             <a
