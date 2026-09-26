@@ -655,7 +655,7 @@ export default function Home() {
             </p>
 
             <a
-              href="https://www.0impact.ai/#climate"
+              href="https://oimpact.ai/#staking"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl transition-all duration-300 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] group text-lg font-semibold text-white"
